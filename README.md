@@ -8,3 +8,5 @@ The computer will choose a random word that is not displayed to the player. The 
 
 **The full spec for the game is in the repo
 https://github.com/menuchabern/Hangman-Game**
+
+![wirefram](https://github.com/user-attachments/assets/0bf04c16-236c-4aba-8da1-cebb9d23bed7)
