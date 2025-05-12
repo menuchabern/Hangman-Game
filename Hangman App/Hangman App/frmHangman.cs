@@ -25,7 +25,6 @@ namespace Hangman_App
             btnStart.Click += BtnStart_Click;
         }
 
-        //private void WinMode() { }
         private void ClearScreen()
         {
             lsttxt.ForEach(t =>
@@ -34,32 +33,42 @@ namespace Hangman_App
                 t.Text = "";
             });
             lstletterbtn.ForEach(b => b.Enabled = true);
-            numoftries = 12;
-            lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
             picturenumber = 14;
+            lstletterbtn.ForEach(b => b.Enabled = false);
+            lblTriesLeft.Text = "";
             GetNextPicture();
         }
 
         private void GetWord()
         {
-            ClearScreen();
-            int.TryParse(txtHowManyLetters.Text, out int amntofletters);
-            if (amntofletters > 9)
-            {
-                txtHowManyLetters.Text = "";
-                MessageBox.Show("Please choose a number less than or equal to 9");
-                return;
-            }
-            if (amntofletters == 0)
+            bool correctnumber = int.TryParse(txtHowManyLetters.Text, out int amntofletters);
+            if (txtHowManyLetters.Text == "")
             {
                 amntofletters = 9;
             }
+            else if (amntofletters > 9)
+            {
+                txtHowManyLetters.Text = "";
+                MessageBox.Show("Please choose a number less than or equal to 9");
+                ClearScreen();
+                return;
+            }
+            else if (correctnumber == false || txtHowManyLetters.Text == "0")
+            {
+                txtHowManyLetters.Text = "";
+                MessageBox.Show("Please choose a valid number");
+                ClearScreen();
+                return;
+            }
+            lstletterbtn.ForEach(b => b.Enabled = true);
+            numoftries = 12;
+            lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
             chosenword = lstwords.Where(w => w.Length == amntofletters).Random().ToLower();
             lstchosenword = lsttxt.Take(amntofletters).ToList();
             lstchosenword.ForEach(txt => txt.BorderStyle = BorderStyle.FixedSingle);
         }
 
-        private void CheckIfLetter(Button btn)
+        private void CheckWordIfLetter(Button btn)
         {
             if (chosenword.Contains(btn.Text.ToLower()))
             {
@@ -117,7 +126,7 @@ namespace Hangman_App
         {
             Button btnletter = (Button)sender;
             btnletter.Enabled = false;
-            CheckIfLetter(btnletter);
+            CheckWordIfLetter(btnletter);
 
         }
     }

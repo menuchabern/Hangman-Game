@@ -377,6 +377,7 @@
             // btnZ
             // 
             btnZ.Dock = DockStyle.Fill;
+            btnZ.Enabled = false;
             btnZ.Font = new Font("Segoe UI", 20F);
             btnZ.Location = new Point(507, 113);
             btnZ.Name = "btnZ";
@@ -388,6 +389,7 @@
             // btnY
             // 
             btnY.Dock = DockStyle.Fill;
+            btnY.Enabled = false;
             btnY.Font = new Font("Segoe UI", 20F);
             btnY.Location = new Point(435, 113);
             btnY.Name = "btnY";
@@ -399,6 +401,7 @@
             // btnX
             // 
             btnX.Dock = DockStyle.Fill;
+            btnX.Enabled = false;
             btnX.Font = new Font("Segoe UI", 20F);
             btnX.Location = new Point(363, 113);
             btnX.Name = "btnX";
@@ -410,6 +413,7 @@
             // btnW
             // 
             btnW.Dock = DockStyle.Fill;
+            btnW.Enabled = false;
             btnW.Font = new Font("Segoe UI", 20F);
             btnW.Location = new Point(291, 113);
             btnW.Name = "btnW";
@@ -421,6 +425,7 @@
             // btnV
             // 
             btnV.Dock = DockStyle.Fill;
+            btnV.Enabled = false;
             btnV.Font = new Font("Segoe UI", 20F);
             btnV.Location = new Point(219, 113);
             btnV.Name = "btnV";
@@ -432,6 +437,7 @@
             // btnU
             // 
             btnU.Dock = DockStyle.Fill;
+            btnU.Enabled = false;
             btnU.Font = new Font("Segoe UI", 20F);
             btnU.Location = new Point(147, 113);
             btnU.Name = "btnU";
@@ -443,6 +449,7 @@
             // btnT
             // 
             btnT.Dock = DockStyle.Fill;
+            btnT.Enabled = false;
             btnT.Font = new Font("Segoe UI", 20F);
             btnT.Location = new Point(75, 113);
             btnT.Name = "btnT";
@@ -454,6 +461,7 @@
             // btnS
             // 
             btnS.Dock = DockStyle.Fill;
+            btnS.Enabled = false;
             btnS.Font = new Font("Segoe UI", 20F);
             btnS.Location = new Point(3, 113);
             btnS.Name = "btnS";
@@ -465,6 +473,7 @@
             // btnR
             // 
             btnR.Dock = DockStyle.Fill;
+            btnR.Enabled = false;
             btnR.Font = new Font("Segoe UI", 20F);
             btnR.Location = new Point(579, 58);
             btnR.Name = "btnR";
@@ -476,6 +485,7 @@
             // btnQ
             // 
             btnQ.Dock = DockStyle.Fill;
+            btnQ.Enabled = false;
             btnQ.Font = new Font("Segoe UI", 20F);
             btnQ.Location = new Point(507, 58);
             btnQ.Name = "btnQ";
@@ -487,6 +497,7 @@
             // btnP
             // 
             btnP.Dock = DockStyle.Fill;
+            btnP.Enabled = false;
             btnP.Font = new Font("Segoe UI", 20F);
             btnP.Location = new Point(435, 58);
             btnP.Name = "btnP";
@@ -498,6 +509,7 @@
             // btnO
             // 
             btnO.Dock = DockStyle.Fill;
+            btnO.Enabled = false;
             btnO.Font = new Font("Segoe UI", 20F);
             btnO.Location = new Point(363, 58);
             btnO.Name = "btnO";
@@ -509,6 +521,7 @@
             // btnN
             // 
             btnN.Dock = DockStyle.Fill;
+            btnN.Enabled = false;
             btnN.Font = new Font("Segoe UI", 20F);
             btnN.Location = new Point(291, 58);
             btnN.Name = "btnN";
@@ -520,6 +533,7 @@
             // btnM
             // 
             btnM.Dock = DockStyle.Fill;
+            btnM.Enabled = false;
             btnM.Font = new Font("Segoe UI", 20F);
             btnM.Location = new Point(219, 58);
             btnM.Name = "btnM";
@@ -531,6 +545,7 @@
             // btnL
             // 
             btnL.Dock = DockStyle.Fill;
+            btnL.Enabled = false;
             btnL.Font = new Font("Segoe UI", 20F);
             btnL.Location = new Point(147, 58);
             btnL.Name = "btnL";
@@ -542,6 +557,7 @@
             // btnK
             // 
             btnK.Dock = DockStyle.Fill;
+            btnK.Enabled = false;
             btnK.Font = new Font("Segoe UI", 20F);
             btnK.Location = new Point(75, 58);
             btnK.Name = "btnK";
@@ -553,6 +569,7 @@
             // btnJ
             // 
             btnJ.Dock = DockStyle.Fill;
+            btnJ.Enabled = false;
             btnJ.Font = new Font("Segoe UI", 20F);
             btnJ.Location = new Point(3, 58);
             btnJ.Name = "btnJ";
@@ -564,6 +581,7 @@
             // btnI
             // 
             btnI.Dock = DockStyle.Fill;
+            btnI.Enabled = false;
             btnI.Font = new Font("Segoe UI", 20F);
             btnI.Location = new Point(579, 3);
             btnI.Name = "btnI";
@@ -575,6 +593,7 @@
             // btnH
             // 
             btnH.Dock = DockStyle.Fill;
+            btnH.Enabled = false;
             btnH.Font = new Font("Segoe UI", 20F);
             btnH.Location = new Point(507, 3);
             btnH.Name = "btnH";
@@ -586,6 +605,7 @@
             // btnG
             // 
             btnG.Dock = DockStyle.Fill;
+            btnG.Enabled = false;
             btnG.Font = new Font("Segoe UI", 20F);
             btnG.Location = new Point(435, 3);
             btnG.Name = "btnG";
@@ -597,6 +617,7 @@
             // btnF
             // 
             btnF.Dock = DockStyle.Fill;
+            btnF.Enabled = false;
             btnF.Font = new Font("Segoe UI", 20F);
             btnF.Location = new Point(363, 3);
             btnF.Name = "btnF";
@@ -608,6 +629,7 @@
             // btnE
             // 
             btnE.Dock = DockStyle.Fill;
+            btnE.Enabled = false;
             btnE.Font = new Font("Segoe UI", 20F);
             btnE.Location = new Point(291, 3);
             btnE.Name = "btnE";
@@ -619,6 +641,7 @@
             // btnD
             // 
             btnD.Dock = DockStyle.Fill;
+            btnD.Enabled = false;
             btnD.Font = new Font("Segoe UI", 20F);
             btnD.Location = new Point(219, 3);
             btnD.Name = "btnD";
@@ -630,6 +653,7 @@
             // btnA
             // 
             btnA.Dock = DockStyle.Fill;
+            btnA.Enabled = false;
             btnA.Font = new Font("Segoe UI", 20F);
             btnA.Location = new Point(3, 3);
             btnA.Name = "btnA";
@@ -641,6 +665,7 @@
             // btnB
             // 
             btnB.Dock = DockStyle.Fill;
+            btnB.Enabled = false;
             btnB.Font = new Font("Segoe UI", 20F);
             btnB.Location = new Point(75, 3);
             btnB.Name = "btnB";
@@ -652,6 +677,7 @@
             // btnC
             // 
             btnC.Dock = DockStyle.Fill;
+            btnC.Enabled = false;
             btnC.Font = new Font("Segoe UI", 20F);
             btnC.Location = new Point(147, 3);
             btnC.Name = "btnC";
