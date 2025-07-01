@@ -153,9 +153,15 @@ namespace Hangman_App
                 return;
             }
             Random rnd = new();
-            var reveal = hidden[rnd.Next(hidden.Count)].Index;
-            char letter = chosenword[reveal];
-            lstchosenword[reveal].Text = letter.ToString();
+            var revealIndex = hidden[rnd.Next(hidden.Count)].Index;
+            char letter = chosenword[revealIndex];
+            for (int i = 0; i < chosenword.Length; i++)
+            {
+                if (chosenword[i] == letter && lstchosenword[i].Text == "")
+                {
+                    lstchosenword[i].Text = letter.ToString();
+                }
+            }
             var btn = lstletterbtn.FirstOrDefault(b => b.Text.Equals(letter.ToString(), StringComparison.OrdinalIgnoreCase));
             if (btn != null)
             {
