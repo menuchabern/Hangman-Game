@@ -12,6 +12,7 @@ namespace Hangman_App
         string chosenword;
         int picturenumber = 14;
         int numoftries = 12;
+        int revealsUsed = 0;
 
         public frmHangman()
         {
@@ -23,6 +24,8 @@ namespace Hangman_App
             lstletterbtn.ForEach(b => b.Click += LetterBtn_Click);
 
             btnStart.Click += BtnStart_Click;
+            btnReveal.Click += BtnReveal_Click;
+            btnReveal.Enabled = false;
         }
 
         private void ClearScreen()
@@ -36,6 +39,8 @@ namespace Hangman_App
             picturenumber = 14;
             lstletterbtn.ForEach(b => b.Enabled = false);
             lblTriesLeft.Text = "";
+            btnReveal.Enabled = false;
+            revealsUsed = 0;
             GetNextPicture();
         }
 
@@ -61,6 +66,8 @@ namespace Hangman_App
                 return;
             }
             lstletterbtn.ForEach(b => b.Enabled = true);
+            btnReveal.Enabled = true;
+            revealsUsed = 0;
             numoftries = 12;
             lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
             chosenword = lstwords.Where(w => w.Length == amntofletters).Random().ToLower();
@@ -128,6 +135,47 @@ namespace Hangman_App
             btnletter.Enabled = false;
             CheckWordIfLetter(btnletter);
 
+        }
+
+        private void BtnReveal_Click(object? sender, EventArgs e)
+        {
+            if (revealsUsed >= 3)
+            {
+                btnReveal.Enabled = false;
+                return;
+            }
+            var hidden = lstchosenword
+                .Select((t, i) => new { TextBox = t, Index = i })
+                .Where(x => x.TextBox.Text == "")
+                .ToList();
+            if (hidden.Count == 0)
+            {
+                return;
+            }
+            Random rnd = new();
+            var revealIndex = hidden[rnd.Next(hidden.Count)].Index;
+            char letter = chosenword[revealIndex];
+            for (int i = 0; i < chosenword.Length; i++)
+            {
+                if (chosenword[i] == letter && lstchosenword[i].Text == "")
+                {
+                    lstchosenword[i].Text = letter.ToString();
+                }
+            }
+            var btn = lstletterbtn.FirstOrDefault(b => b.Text.Equals(letter.ToString(), StringComparison.OrdinalIgnoreCase));
+            if (btn != null)
+            {
+                btn.Enabled = false;
+            }
+            numoftries--;
+            lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
+            GetNextPicture();
+            CheckForWin();
+            revealsUsed++;
+            if (revealsUsed >= 3)
+            {
+                btnReveal.Enabled = false;
+            }
         }
     }
 }

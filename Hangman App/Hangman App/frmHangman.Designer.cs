@@ -36,6 +36,7 @@
             lblHowManyLetters = new Label();
             txtHowManyLetters = new TextBox();
             lblTriesLeft = new Label();
+            btnReveal = new Button();
             tblWord = new TableLayoutPanel();
             txt1 = new TextBox();
             txt2 = new TextBox();
@@ -119,15 +120,17 @@
             // tblToolbar
             // 
             tblToolbar.AutoSize = true;
-            tblToolbar.ColumnCount = 4;
-            tblToolbar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30.3039455F));
-            tblToolbar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30.30395F));
-            tblToolbar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9.091186F));
-            tblToolbar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30.3009224F));
+            tblToolbar.ColumnCount = 5;
+            tblToolbar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tblToolbar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tblToolbar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tblToolbar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tblToolbar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tblToolbar.Controls.Add(btnStart, 0, 0);
             tblToolbar.Controls.Add(lblHowManyLetters, 1, 0);
             tblToolbar.Controls.Add(txtHowManyLetters, 2, 0);
             tblToolbar.Controls.Add(lblTriesLeft, 3, 0);
+            tblToolbar.Controls.Add(btnReveal, 4, 0);
             tblToolbar.Dock = DockStyle.Fill;
             tblToolbar.Location = new Point(3, 3);
             tblToolbar.Name = "tblToolbar";
@@ -180,8 +183,19 @@
             lblTriesLeft.Text = " ";
             lblTriesLeft.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // btnReveal
+            //
+            btnReveal.Dock = DockStyle.Fill;
+            btnReveal.Font = new Font("Segoe UI", 11F);
+            btnReveal.Location = new Point(0, 0);
+            btnReveal.Name = "btnReveal";
+            btnReveal.Size = new Size(127, 46);
+            btnReveal.TabIndex = 4;
+            btnReveal.Text = "Reveal";
+            btnReveal.UseVisualStyleBackColor = true;
+            //
             // tblWord
-            // 
+            //
             tblWord.ColumnCount = 9;
             tblWord.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.11111F));
             tblWord.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1111107F));
@@ -727,6 +741,7 @@
         private Label lblHowManyLetters;
         private TextBox txtHowManyLetters;
         private Label lblTriesLeft;
+        private Button btnReveal;
         private TableLayoutPanel tblWord;
         private TextBox txt1;
         private TextBox txt2;
