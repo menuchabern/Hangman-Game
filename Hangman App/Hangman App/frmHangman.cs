@@ -12,6 +12,7 @@ namespace Hangman_App
         string chosenword;
         int picturenumber = 14;
         int numoftries = 12;
+        int revealsUsed = 0;
 
         public frmHangman()
         {
@@ -39,6 +40,7 @@ namespace Hangman_App
             lstletterbtn.ForEach(b => b.Enabled = false);
             lblTriesLeft.Text = "";
             btnReveal.Enabled = false;
+            revealsUsed = 0;
             GetNextPicture();
         }
 
@@ -65,6 +67,7 @@ namespace Hangman_App
             }
             lstletterbtn.ForEach(b => b.Enabled = true);
             btnReveal.Enabled = true;
+            revealsUsed = 0;
             numoftries = 12;
             lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
             chosenword = lstwords.Where(w => w.Length == amntofletters).Random().ToLower();
@@ -136,6 +139,11 @@ namespace Hangman_App
 
         private void BtnReveal_Click(object? sender, EventArgs e)
         {
+            if (revealsUsed >= 3)
+            {
+                btnReveal.Enabled = false;
+                return;
+            }
             var hidden = lstchosenword
                 .Select((t, i) => new { TextBox = t, Index = i })
                 .Where(x => x.TextBox.Text == "")
@@ -157,6 +165,11 @@ namespace Hangman_App
             lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
             GetNextPicture();
             CheckForWin();
+            revealsUsed++;
+            if (revealsUsed >= 3)
+            {
+                btnReveal.Enabled = false;
+            }
         }
     }
 }
