@@ -1,10 +1,10 @@
 using Common.Extensions;
 using gnuciDictionary;
+using HangmanSystem;
 namespace Hangman_App
 {
     public partial class frmHangman : Form
     {
-        List<Word> lstgnuciwords = gnuciDictionary.EnglishDictionary.GetAllWords().ToList();
         List<String> lstwords;
         List<Button> lstletterbtn;
         List<TextBox> lsttxt;
@@ -16,7 +16,6 @@ namespace Hangman_App
         public frmHangman()
         {
             InitializeComponent();
-            lstwords = lstgnuciwords.Select(w => w.Value.ToString()).ToList();
             lstletterbtn = new() { btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ };
             lsttxt = new() { txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9 };
 
@@ -39,7 +38,7 @@ namespace Hangman_App
             GetNextPicture();
         }
 
-        private void GetWord()
+        private void ReturnWord()
         {
             bool correctnumber = int.TryParse(txtHowManyLetters.Text, out int amntofletters);
             if (txtHowManyLetters.Text == "")
@@ -50,16 +49,17 @@ namespace Hangman_App
             {
                 txtHowManyLetters.Text = "";
                 MessageBox.Show("Please choose a number less than or equal to 9");
-                ClearScreen();
+                //ClearScreen();
                 return;
             }
             else if (correctnumber == false || txtHowManyLetters.Text == "0")
             {
                 txtHowManyLetters.Text = "";
                 MessageBox.Show("Please choose a valid number");
-                ClearScreen();
+                //ClearScreen();
                 return;
             }
+
             lstletterbtn.ForEach(b => b.Enabled = true);
             numoftries = 12;
             lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
@@ -90,7 +90,7 @@ namespace Hangman_App
             }
         }
 
-        private void CheckForLoose()
+        private void CheckForLose()
         {
             if (picturenumber == 1)
             {
@@ -113,12 +113,12 @@ namespace Hangman_App
             picturenumber--;
             string piclocation = Application.StartupPath + @"pics\" + picturenumber.ToString() + ".png";
             picGallows.ImageLocation = piclocation;
-            CheckForLoose();
+            CheckForLose();
         }
 
         private void BtnStart_Click(object? sender, EventArgs e)
         {
-            GetWord();
+            //GetWord();
 
         }
 
