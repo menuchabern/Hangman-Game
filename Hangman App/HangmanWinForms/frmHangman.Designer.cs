@@ -74,6 +74,7 @@
             btnB = new Button();
             btnC = new Button();
             picGallows = new PictureBox();
+            lblMessage = new Label();
             tblMain.SuspendLayout();
             tblLeft.SuspendLayout();
             tblToolbar.SuspendLayout();
@@ -104,6 +105,7 @@
             tblLeft.Controls.Add(tblToolbar, 0, 0);
             tblLeft.Controls.Add(tblWord, 0, 2);
             tblLeft.Controls.Add(tblLetters, 0, 4);
+            tblLeft.Controls.Add(lblMessage, 0, 1);
             tblLeft.Dock = DockStyle.Fill;
             tblLeft.Location = new Point(3, 3);
             tblLeft.Name = "tblLeft";
@@ -697,6 +699,18 @@
             picGallows.TabIndex = 1;
             picGallows.TabStop = false;
             // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.Dock = DockStyle.Fill;
+            lblMessage.Font = new Font("Segoe UI", 30F, FontStyle.Bold);
+            lblMessage.ForeColor = Color.Red;
+            lblMessage.Location = new Point(3, 58);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(657, 254);
+            lblMessage.TabIndex = 3;
+            lblMessage.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // frmHangman
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -765,5 +779,6 @@
         private Button btnB;
         private Button btnC;
         private PictureBox picGallows;
+        private Label lblMessage;
     }
 }
