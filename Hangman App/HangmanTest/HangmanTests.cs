@@ -1,3 +1,4 @@
+using gnuciDictionary;
 using HangmanSystem;
 using Microsoft.VisualBasic;
 using NUnit.Framework.Internal.Execution;
@@ -27,26 +28,26 @@ namespace HangmanTest
         [Test]
         public void CheckIfHasLetter()
         {
-            ChosenWord word = new();
-            word.AmntOfLetters = 5;
-            string guessingword = word.ChooseNewWord();
+            Game game = new();
+            int amntletters = 5;
+            string guessingword = game.StartGame(amntletters);
             string letter = guessingword[4].ToString();
-            word.CheckWordIfLetter(letter);
-            string msg = $"the word has {guessingword.Length} = {word.TextBoxesLst.Count} letters. and the letter {letter} was chosen and {guessingword} should contain a {letter}";
-            Assert.IsTrue(word.TextBoxesLst[4] == letter && word.TextBoxesLst.Count == guessingword.Length, msg);
+            game.CheckWordIfLetter(letter);
+            string msg = $"the word has {guessingword.Length} = {game.TextBoxesLst.Count} letters. and the letter {letter} was chosen and {guessingword} should contain a {letter}";
+            Assert.IsTrue(game.TextBoxesLst[4] == letter && game.TextBoxesLst.Count == guessingword.Length, msg);
             TestContext.WriteLine(msg);
         }
 
         [Test]
         public void CheckIfDoesntHaveLetter()
         {
-            ChosenWord word = new();
-            word.AmntOfLetters = 5;
-            string guessingword = word.ChooseNewWord();
+            Game game = new();
+            int amntletters = 5;
+            string guessingword = game.StartGame(amntletters);
             string letter = "q";
             bool b = guessingword.Contains("q");
             Assume.That(b == false, $"the word did contain a q, can't run test. the word was {guessingword}");
-            word.CheckWordIfLetter(letter);
+            game.CheckWordIfLetter(letter);
             string msg = $"the letter {letter} was chosen and {guessingword} does not contain a {letter}";
             Assert.IsFalse(guessingword.Contains(letter), msg);
             TestContext.WriteLine(msg);
@@ -55,42 +56,42 @@ namespace HangmanTest
         [Test]
         public void CheckForWin()
         {
-            ChosenWord word = new();
-            word.AmntOfLetters = 3;
-            string guessingword = word.ChooseNewWord();
+            Game game = new();
+            int amntletters = 3;
+            string guessingword = game.StartGame(amntletters);
             string letter1 = guessingword[0].ToString();
-            word.CheckWordIfLetter(letter1);
+            game.CheckWordIfLetter(letter1);
             string letter2 = guessingword[1].ToString();
-            word.CheckWordIfLetter(letter2);
+            game.CheckWordIfLetter(letter2);
             string letter3 = guessingword[2].ToString();
-            word.CheckWordIfLetter(letter3);
-            word.CheckForWin();
-            string msg = $"the word was {guessingword} and {letter1}, {letter2} and {letter3} were guessed so the game status is {word.GameMessage}";
-            Assert.IsTrue(word.GameMessage == "You Won!", msg);
+            game.CheckWordIfLetter(letter3);
+            game.CheckForWin();
+            string msg = $"the word was {guessingword} and {letter1}, {letter2} and {letter3} were guessed so the game status is {game.GameMessage}";
+            Assert.IsTrue(game.GameMessage == "You Won!", msg);
             TestContext.WriteLine(msg);
         }
 
         [Test]
         public void CheckForLose()
         {
-            ChosenWord word = new();
-            word.NumOfTries = 12;
-            word.picturenum = 14;
-            word.AmntOfLetters = 3;
-            string guessingword = word.ChooseNewWord();
+            int amntletters = 3;
+            Game game = new();
+            string guessingword = game.StartGame(amntletters);
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
             int timestried = 0;
             foreach (char letter in alphabet)
             {
-                if (word.GameMessage == "")
+                if (game.GameMessage == "")
                 {
-                    word.CheckWordIfLetter(letter.ToString());
+                    game.CheckWordIfLetter(letter.ToString());
                     if (guessingword.Contains(letter.ToString()) == false) { timestried++; }
+                    game.CheckForWin();
+                    game.CheckForLose();
                 }
             }
-            string basicmsg = $"num of tries = {timestried}, word = {guessingword}, Message = {word.GameMessage}";
-            Assume.That(word.GameMessage.StartsWith("You Lost"), "Didnt lose. try running test again." + basicmsg);
-            Assert.IsTrue(word.GameMessage.StartsWith("You Lost"), basicmsg);
+            string basicmsg = $"num of tries = {timestried}, word = {guessingword}, Message = {game.GameMessage}";
+            Assume.That(game.GameMessage.StartsWith("You Lost"), "Didnt lose. try running test again." + basicmsg);
+            Assert.IsTrue(game.GameMessage.StartsWith("You Lost"), basicmsg);
             TestContext.WriteLine("Tried " + timestried + " and lost." + basicmsg);
         }
     }

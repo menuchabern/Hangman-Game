@@ -1,126 +1,127 @@
-//using Common.Extensions;
-//using gnuciDictionary;
-//using HangmanSystem;
-//namespace Hangman_App
-//{
-//    public partial class frmHangman : Form
-//    {
-//        List<Button> lstletterbtn;
-//        List<TextBox> lsttxt;
+using Common.Extensions;
+using gnuciDictionary;
+using HangmanSystem;
+namespace Hangman_App
+{
+    public partial class frmHangman : Form
+    {
+        List<Button> lstletterbtn;
+        List<TextBox> lsttxt;
 
-//        public frmHangman()
-//        {
-//            InitializeComponent();
-//            lstletterbtn = new() { btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ };
-//            lsttxt = new() { txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9 };
+        public frmHangman()
+        {
+            InitializeComponent();
+            lstletterbtn = new() { btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ };
+            lsttxt = new() { txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9 };
 
-//            lstletterbtn.ForEach(b => b.Click += LetterBtn_Click);
-//            btnStart.Click += BtnStart_Click;
-//        }
+            lstletterbtn.ForEach(b => b.Click += LetterBtn_Click);
+            btnStart.Click += BtnStart_Click;
 
-//        private void ClearScreen()
-//        {
-//            lsttxt.ForEach(t =>
-//            {
-//                t.BorderStyle = BorderStyle.None;
-//                t.Text = "";
-//            });
-//            lstletterbtn.ForEach(b => b.Enabled = true);
-//            lstletterbtn.ForEach(b => b.Enabled = false);
-//            lblTriesLeft.Text = "";
-//            GetNextPicture();
-//        }
+        }
 
-//        private void ReturnWord()
-//        {
-//            bool correctnumber = int.TryParse(txtHowManyLetters.Text, out int amntofletters);
-//            if (txtHowManyLetters.Text == "")
-//            {
-//                amntofletters = 9;
-//            }
-//            else if (amntofletters > 9)
-//            {
-//                txtHowManyLetters.Text = "";
-//                MessageBox.Show("Please choose a number less than or equal to 9");
-//                //ClearScreen();
-//                return;
-//            }
-//            else if (correctnumber == false || txtHowManyLetters.Text == "0")
-//            {
-//                txtHowManyLetters.Text = "";
-//                MessageBox.Show("Please choose a valid number");
-//                //ClearScreen();
-//                return;
-//            }
+        //        private void ClearScreen()
+        //        {
+        //            lsttxt.ForEach(t =>
+        //            {
+        //                t.BorderStyle = BorderStyle.None;
+        //                t.Text = "";
+        //            });
+        //            lstletterbtn.ForEach(b => b.Enabled = true);
+        //            lstletterbtn.ForEach(b => b.Enabled = false);
+        //            lblTriesLeft.Text = "";
+        //            GetNextPicture();
+        //        }
 
-//            lstletterbtn.ForEach(b => b.Enabled = true);
-//            numoftries = 12;
-//            lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
-//            chosenword = lstwords.Where(w => w.Length == amntofletters).Random().ToLower();
-//            lstchosenword = lsttxt.Take(amntofletters).ToList();
-//            lstchosenword.ForEach(txt => txt.BorderStyle = BorderStyle.FixedSingle);
-//        }
+        //        private void ReturnWord()
+        //        {
+        //            bool correctnumber = int.TryParse(txtHowManyLetters.Text, out int amntofletters);
+        //            if (txtHowManyLetters.Text == "")
+        //            {
+        //                amntofletters = 9;
+        //            }
+        //            else if (amntofletters > 9)
+        //            {
+        //                txtHowManyLetters.Text = "";
+        //                MessageBox.Show("Please choose a number less than or equal to 9");
+        //                ClearScreen();
+        //                return;
+        //            }
+        //            else if (correctnumber == false || txtHowManyLetters.Text == "0")
+        //            {
+        //                txtHowManyLetters.Text = "";
+        //                MessageBox.Show("Please choose a valid number");
+        //                ClearScreen();
+        //                return;
+        //            }
 
-//        private void CheckWordIfLetter(Button btn)
-//        {
-//            if (chosenword.Contains(btn.Text.ToLower()))
-//            {
-//                string letter = btn.Text.ToString().ToLower();
-//                for (int i = 0; i < chosenword.Length; i++)
-//                {
-//                    if (chosenword[i].ToString().ToLower() == letter)
-//                    {
-//                        lstchosenword[i].Text = letter;
-//                    }
-//                }
-//                CheckForWin();
-//            }
-//            else
-//            {
-//                numoftries--;
-//                lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
-//                GetNextPicture();
-//            }
-//        }
+        //            lstletterbtn.ForEach(b => b.Enabled = true);
+        //            numoftries = 12;
+        //            lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
+        //            chosenword = lstwords.Where(w => w.Length == amntofletters).Random().ToLower();
+        //            lstchosenword = lsttxt.Take(amntofletters).ToList();
+        //            lstchosenword.ForEach(txt => txt.BorderStyle = BorderStyle.FixedSingle);
+        //        }
 
-//        private void CheckForLose()
-//        {
-//            if (picturenumber == 1)
-//            {
-//                MessageBox.Show("YOU LOST" + Environment.NewLine + "The word was " + chosenword);
-//                ClearScreen();
-//            }
-//        }
+        //        private void CheckWordIfLetter(Button btn)
+        //        {
+        //            if (chosenword.Contains(btn.Text.ToLower()))
+        //            {
+        //                string letter = btn.Text.ToString().ToLower();
+        //                for (int i = 0; i < chosenword.Length; i++)
+        //                {
+        //                    if (chosenword[i].ToString().ToLower() == letter)
+        //                    {
+        //                        lstchosenword[i].Text = letter;
+        //                    }
+        //                }
+        //                CheckForWin();
+        //            }
+        //            else
+        //            {
+        //                numoftries--;
+        //                lblTriesLeft.Text = numoftries.ToString() + " Tries Left";
+        //                GetNextPicture();
+        //            }
+        //        }
 
-//        private void CheckForWin()
-//        {
-//            if (lstchosenword.All(t => t.Text != ""))
-//            {
-//                MessageBox.Show("YOU WON!!!!");
-//                ClearScreen();
-//            }
-//        }
+        //        private void CheckForLose()
+        //        {
+        //            if (picturenumber == 1)
+        //            {
+        //                MessageBox.Show("YOU LOST" + Environment.NewLine + "The word was " + chosenword);
+        //                ClearScreen();
+        //            }
+        //        }
 
-//        private void GetNextPicture()
-//        {
-//            picturenumber--;
-//            string piclocation = Application.StartupPath + @"pics\" + picturenumber.ToString() + ".png";
-//            picGallows.ImageLocation = piclocation;
-//            CheckForLose();
-//        }
+        //        private void CheckForWin()
+        //        {
+        //            if (lstchosenword.All(t => t.Text != ""))
+        //            {
+        //                MessageBox.Show("YOU WON!!!!");
+        //                ClearScreen();
+        //            }
+        //        }
 
-//        private void BtnStart_Click(object? sender, EventArgs e)
-//        {
-//            //GetWord();
+        //        private void GetNextPicture()
+        //        {
+        //            picturenumber--;
+        //            string piclocation = Application.StartupPath + @"pics\" + picturenumber.ToString() + ".png";
+        //            picGallows.ImageLocation = piclocation;
+        //            CheckForLose();
+        //        }
 
-//        }
+        private void BtnStart_Click(object? sender, EventArgs e)
+        {
+            //            GetWord();
 
-//        private void LetterBtn_Click(object? sender, EventArgs e)
-//        {
-//            Button btnletter = (Button)sender;
-//            btnletter.Enabled = false;
-//            CheckWordIfLetter(btnletter);
+        }
 
-//        }
-//    }
-//}
+        private void LetterBtn_Click(object? sender, EventArgs e)
+        {
+            //            Button btnletter = (Button)sender;
+            //            btnletter.Enabled = false;
+            //            CheckWordIfLetter(btnletter);
+
+        }
+}
+}
