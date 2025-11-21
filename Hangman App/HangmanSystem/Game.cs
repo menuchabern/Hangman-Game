@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Runtime.CompilerServices;
-using static HangmanSystem.ChosenWord;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace HangmanSystem
@@ -14,37 +14,40 @@ namespace HangmanSystem
         public enum GameStatusEnum { Playing, Won, Lost };
         private int _numoftries = 12;
         private GameStatusEnum _gamestatus;
-        private string _numoftriesdescription = "";
         private List<Letters> _letterboxes = new();
-        private string _gamemessage = "";
-        private int _picnum;
         public List<Letters> letterboxes
         {
             get => _letterboxes;
             set
             {
+                for (int i = 0; i < chosenword.AmntOfLetters; i++)
+                {
+                    Letters letter = new();
+                    letterboxes.Add(letter);
+                }
                 _letterboxes = value;
                 InvokePropertyChanged();
             }
         }
-        public string PictureLocationWinForms { get => AppDomain.CurrentDomain.BaseDirectory + @"pics\" + (NumOfTries +1) + ".png"; } 
+        public string PictureLocationWinForms { get => AppDomain.CurrentDomain.BaseDirectory + @"pics\" + (NumOfTries + 1) + ".png"; }
         public string GameMessage
         {
-            get {
+            get
+            {
                 switch (GameStatus)
                 {
                     case GameStatusEnum.Won:
                         return "You Won!";
-                        break;
                     case GameStatusEnum.Lost:
                         return "You Lost!" + Environment.NewLine + "the word was " + chosenword.GuessingWord.ToUpper();
-                        break;
                     default:
                         return "";
-                        break;
                 }
             }
         }
+
+        public int PicNumMaui { get => NumOfTries + 1; }
+
         public int NumOfTries
         {
             get => _numoftries;
@@ -54,6 +57,8 @@ namespace HangmanSystem
                 InvokePropertyChanged();
                 InvokePropertyChanged("NumOfTriesDescription");
                 InvokePropertyChanged("PictureLocationWinForms");
+                InvokePropertyChanged("PicNumMaui");
+
             }
         }
 
@@ -80,6 +85,7 @@ namespace HangmanSystem
             {
                 Letters letter = new();
                 letterboxes.Add(letter);
+                letter.BackColorWinForms = letter.ActiveColor;
             }
             NumOfTries = 12;
             GameStatus = GameStatusEnum.Playing;

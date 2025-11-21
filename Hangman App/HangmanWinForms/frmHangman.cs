@@ -54,7 +54,8 @@ namespace Hangman_App
                 Letters letter = game.letterboxes[lsttxt.IndexOf(item)];
                 item.DataBindings.Clear();
                 item.DataBindings.Add("Text", letter, "Text");
-                item.BorderStyle = BorderStyle.FixedSingle;
+                item.DataBindings.Add("BackColor", letter, "BackColorWinForms");
+                //item.BorderStyle = BorderStyle.FixedSingle;
             }
             btnStart.Enabled = false;
         }
