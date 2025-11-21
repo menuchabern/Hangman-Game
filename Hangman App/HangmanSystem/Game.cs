@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel;
+using System.IO;
+using System.Runtime.CompilerServices;
 using static HangmanSystem.ChosenWord;
 using static System.Net.Mime.MediaTypeNames;
-using System.IO;
 
 namespace HangmanSystem
 {
@@ -11,24 +12,36 @@ namespace HangmanSystem
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public enum GameStatusEnum { Playing, Won, Lost };
-        private int _numoftries;
+        private int _numoftries = 12;
         private GameStatusEnum _gamestatus;
-        //public BindingList<String> ActiveTxtBoxesLst { get; set; } = new();
-        public List<Letters> letterboxes { get; set; } = new();
-        public string PictureLocationWinForms { get { return AppDomain.CurrentDomain.BaseDirectory + @"pics\" + picturenum + ".png"; } }
+        private string _numoftriesdescription = "";
+        private List<Letters> _letterboxes = new();
+        private string _gamemessage = "";
+        private int _picnum;
+        public List<Letters> letterboxes
+        {
+            get => _letterboxes;
+            set
+            {
+                _letterboxes = value;
+                InvokePropertyChanged();
+            }
+        }
+        public string PictureLocationWinForms { get => AppDomain.CurrentDomain.BaseDirectory + @"pics\" + (NumOfTries +1) + ".png"; } 
         public string GameMessage
         {
-            get
-            {
-                chosenword.InvokePropertyChanged();
+            get {
                 switch (GameStatus)
                 {
                     case GameStatusEnum.Won:
                         return "You Won!";
+                        break;
                     case GameStatusEnum.Lost:
-                        return "You Lost!" + Environment.NewLine + "the word was " + chosenword.GuessingWord;
+                        return "You Lost!" + Environment.NewLine + "the word was " + chosenword.GuessingWord.ToUpper();
+                        break;
                     default:
                         return "";
+                        break;
                 }
             }
         }
@@ -38,38 +51,38 @@ namespace HangmanSystem
             set
             {
                 _numoftries = value;
-                chosenword.InvokePropertyChanged();
-                chosenword.InvokePropertyChanged("picturenum");
+                InvokePropertyChanged();
+                InvokePropertyChanged("NumOfTriesDescription");
+                InvokePropertyChanged("PictureLocationWinForms");
             }
         }
 
-        public string NumOfTriesDescription { get { chosenword.InvokePropertyChanged(); return NumOfTries.ToString() + " Tries Left"; } }
+        public string NumOfTriesDescription
+        {
+            get => NumOfTries.ToString() + " Tries Left";
+        }
+
         public GameStatusEnum GameStatus
         {
             get => _gamestatus;
             set
             {
                 _gamestatus = value;
-                chosenword.InvokePropertyChanged();
-                chosenword.InvokePropertyChanged("GameMessage");
+                InvokePropertyChanged();
+                InvokePropertyChanged("GameMessage");
             }
-        }
-        public int picturenum
-        {
-            get
-            {
-                chosenword.InvokePropertyChanged();
-                chosenword.InvokePropertyChanged("PictureLocationWinForms");
-                return NumOfTries + 1;
-            }
-
         }
 
         public string StartGame(int amntofletters)
         {
             chosenword.AmntOfLetters = amntofletters;
-            //ActiveTxtBoxesLst = chosenword.ActiveTextBoxes;
+            for (int i = 0; i < amntofletters; i++)
+            {
+                Letters letter = new();
+                letterboxes.Add(letter);
+            }
             NumOfTries = 12;
+            GameStatus = GameStatusEnum.Playing;
             return chosenword.ChooseNewWord();
         }
 
@@ -79,10 +92,9 @@ namespace HangmanSystem
             {
                 for (int i = 0; i < chosenword.GuessingWord.Length; i++)
                 {
-                    if (chosenword.GuessingWord[i].ToString().ToLower() == letter.ToString())
+                    if (chosenword.GuessingWord[i].ToString().ToLower() == letter.ToLower())
                     {
                         letterboxes[i].Text = letter;
-                        //chosenword.ActiveTextBoxes[i] = letter;
                     }
                 }
                 CheckForWin();
@@ -90,35 +102,38 @@ namespace HangmanSystem
             else
             {
                 NumOfTries--;
+                CheckForLose();
             }
-            CheckForLose();
         }
-
 
         public void EndGame()
         {
-            //chosenword.ActiveTextBoxes.Clear();
-            //chosenword.AmntOfLetters = 0;
-            //NumOfTries = 0;
+            letterboxes.Clear();
+            chosenword.AmntOfLetters = 0;
         }
 
         public void CheckForWin()
         {
-            //if (chosenword./ActiveTextBoxes.All(t => t != ""))
-            //{
-            //    GameStatus = GameStatusEnum.Won;
-            //    Game game = new();
-            //    game.EndGame();
-            //}
+            if (letterboxes.All(t => t.Text != ""))
+            {
+                GameStatus = GameStatusEnum.Won;
+                EndGame();
+            }
         }
 
         public void CheckForLose()
         {
-            if (picturenum == 1 && NumOfTries == 0)
+            if (NumOfTries == 0)
             {
                 GameStatus = GameStatusEnum.Lost;
                 EndGame();
             }
         }
+
+        private void InvokePropertyChanged([CallerMemberName] string propertyname = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
+        }
+
     }
 }

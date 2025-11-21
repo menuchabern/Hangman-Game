@@ -1,26 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Forms;
 
 namespace HangmanSystem
 {
     public class Letters : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        private BorderStyle borderStyle;
-        public BorderStyle BorderStyleProperty
-        {
-            get => borderStyle;
-            set
-            {
-                if (borderStyle != value)
-                {
-                    borderStyle = value;
-                    OnPropertyChanged(nameof(BorderStyleProperty));
-                }
-            }
-        }
-
+        private string _text = "";
+        public string Text { get => _text; set { _text = value; InvokePropertyChanged(); } } 
         internal void InvokePropertyChanged([CallerMemberName] string propertyname = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));

@@ -12,7 +12,7 @@ namespace Hangman_App
             InitializeComponent();
             lstletterbtn = new() { btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ };
             lsttxt = new() { txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9 };
-
+            
             lblMessage.DataBindings.Add("Text", game, "GameMessage");
             lblTriesLeft.DataBindings.Add("Text", game, "NumOfTriesDescription");
             picGallows.DataBindings.Add("ImageLocation", game, "PictureLocationWinForms");
@@ -52,8 +52,11 @@ namespace Hangman_App
             foreach (TextBox item in lsttxt.Take(amntofletters))
             {
                 Letters letter = game.letterboxes[lsttxt.IndexOf(item)];
+                item.DataBindings.Clear();
                 item.DataBindings.Add("Text", letter, "Text");
+                item.BorderStyle = BorderStyle.FixedSingle;
             }
+            btnStart.Enabled = false;
         }
 
         private void LetterBtn_Click(object? sender, EventArgs e)
@@ -62,7 +65,7 @@ namespace Hangman_App
             btnletter.Enabled = false;
             game.CheckWordIfLetter(btnletter.Text);
 
-            if (game.GameMessage.StartsWith("You Lost"))
+            if (game.GameMessage != "")
             {
                 lsttxt.ForEach(t =>
                 {
@@ -70,6 +73,7 @@ namespace Hangman_App
                     t.Text = "";
                 });
                 lstletterbtn.ForEach(b => b.Enabled = false);
+                btnStart.Enabled = true;
             }
         }
     }
