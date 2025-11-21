@@ -13,10 +13,6 @@ namespace Hangman_App
             lstletterbtn = new() { btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ };
             lsttxt = new() { txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9 };
 
-            for (int i = 0; i < game.ActiveTxtBoxesLst.Count; i++)
-            {
-                lsttxt[i].DataBindings.Add("Text", game.ActiveTxtBoxesLst, $"[{i}]");
-            }
             lblMessage.DataBindings.Add("Text", game, "GameMessage");
             lblTriesLeft.DataBindings.Add("Text", game, "NumOfTriesDescription");
             picGallows.DataBindings.Add("ImageLocation", game, "PictureLocationWinForms");
@@ -25,7 +21,7 @@ namespace Hangman_App
             btnStart.Click += BtnStart_Click;
         }
 
-        
+
         private bool CheckIfNumOfLettersValid()
         {
             bool b = true;
@@ -47,14 +43,16 @@ namespace Hangman_App
 
         private void BtnStart_Click(object? sender, EventArgs e)
         {
-            int.TryParse(txtHowManyLetters.Text, out int amntofletters);
+            int amntofletters;
+            int.TryParse(txtHowManyLetters.Text, out amntofletters);
             if (CheckIfNumOfLettersValid() == false) return;
             game.StartGame(amntofletters);
             lstletterbtn.ForEach(b => b.Enabled = true);
-            for (int i = 0; i < game.ActiveTxtBoxesLst.Count; i++)
+
+            foreach (TextBox item in lsttxt.Take(amntofletters))
             {
-                lsttxt[i].BorderStyle = BorderStyle.FixedSingle;
-                lsttxt[i].DataBindings.Add("Text", game.ActiveTxtBoxesLst, $"[{i}]");
+                Letters letter = game.letterboxes[lsttxt.IndexOf(item)];
+                item.DataBindings.Add("Text", letter, "Text");
             }
         }
 
@@ -64,7 +62,7 @@ namespace Hangman_App
             btnletter.Enabled = false;
             game.CheckWordIfLetter(btnletter.Text);
 
-            if(game.GameMessage.StartsWith("You Lost"))
+            if (game.GameMessage.StartsWith("You Lost"))
             {
                 lsttxt.ForEach(t =>
                 {

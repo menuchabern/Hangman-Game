@@ -13,7 +13,8 @@ namespace HangmanSystem
         public enum GameStatusEnum { Playing, Won, Lost };
         private int _numoftries;
         private GameStatusEnum _gamestatus;
-        public BindingList<String> ActiveTxtBoxesLst { get; set; } = new();
+        //public BindingList<String> ActiveTxtBoxesLst { get; set; } = new();
+        public List<Letters> letterboxes { get; set; } = new();
         public string PictureLocationWinForms { get { return AppDomain.CurrentDomain.BaseDirectory + @"pics\" + picturenum + ".png"; } }
         public string GameMessage
         {
@@ -67,7 +68,7 @@ namespace HangmanSystem
         public string StartGame(int amntofletters)
         {
             chosenword.AmntOfLetters = amntofletters;
-            ActiveTxtBoxesLst = chosenword.ActiveTextBoxes;
+            //ActiveTxtBoxesLst = chosenword.ActiveTextBoxes;
             NumOfTries = 12;
             return chosenword.ChooseNewWord();
         }
@@ -80,7 +81,8 @@ namespace HangmanSystem
                 {
                     if (chosenword.GuessingWord[i].ToString().ToLower() == letter.ToString())
                     {
-                        chosenword.ActiveTextBoxes[i] = letter;
+                        letterboxes[i].Text = letter;
+                        //chosenword.ActiveTextBoxes[i] = letter;
                     }
                 }
                 CheckForWin();
@@ -95,19 +97,19 @@ namespace HangmanSystem
 
         public void EndGame()
         {
-            chosenword.ActiveTextBoxes.Clear();
-            chosenword.AmntOfLetters = 0;
-            NumOfTries = 0;
+            //chosenword.ActiveTextBoxes.Clear();
+            //chosenword.AmntOfLetters = 0;
+            //NumOfTries = 0;
         }
 
         public void CheckForWin()
         {
-            if (chosenword.ActiveTextBoxes.All(t => t != ""))
-            {
-                GameStatus = GameStatusEnum.Won;
-                Game game = new();
-                game.EndGame();
-            }
+            //if (chosenword./ActiveTextBoxes.All(t => t != ""))
+            //{
+            //    GameStatus = GameStatusEnum.Won;
+            //    Game game = new();
+            //    game.EndGame();
+            //}
         }
 
         public void CheckForLose()
