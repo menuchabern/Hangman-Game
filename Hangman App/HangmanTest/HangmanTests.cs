@@ -33,8 +33,8 @@ namespace HangmanTest
             string guessingword = game.StartGame(amntletters);
             string letter = guessingword[4].ToString();
             game.CheckWordIfLetter(letter);
-            string msg = $"the word has {guessingword.Length} = {game.TextBoxesLst.Count} letters. and the letter {letter} was chosen and {guessingword} should contain a {letter}";
-            Assert.IsTrue(game.TextBoxesLst[4] == letter && game.TextBoxesLst.Count == guessingword.Length, msg);
+            string msg = $"the word has {guessingword.Length} = {game.ActiveTxtBoxesLst.Count} letters. and the letter {letter} was chosen and {guessingword} should contain a {letter}";
+            Assert.IsTrue(game.ActiveTxtBoxesLst[4] == letter && game.ActiveTxtBoxesLst.Count == guessingword.Length, msg);
             TestContext.WriteLine(msg);
         }
 

@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using static HangmanSystem.ChosenWord;
+using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 
 namespace HangmanSystem
 {
@@ -11,14 +13,8 @@ namespace HangmanSystem
         public enum GameStatusEnum { Playing, Won, Lost };
         private int _numoftries;
         private GameStatusEnum _gamestatus;
-        public List<String> TextBoxesLst = new();
-
-        public Game()
-        {
-            TextBoxesLst = chosenword.TextBoxesLst;
-        }
-
-
+        public BindingList<String> ActiveTxtBoxesLst { get; set; } = new();
+        public string PictureLocationWinForms { get { return AppDomain.CurrentDomain.BaseDirectory + @"pics\" + picturenum + ".png"; } }
         public string GameMessage
         {
             get
@@ -45,6 +41,8 @@ namespace HangmanSystem
                 chosenword.InvokePropertyChanged("picturenum");
             }
         }
+
+        public string NumOfTriesDescription { get { chosenword.InvokePropertyChanged(); return NumOfTries.ToString() + " Tries Left"; } }
         public GameStatusEnum GameStatus
         {
             get => _gamestatus;
@@ -57,13 +55,19 @@ namespace HangmanSystem
         }
         public int picturenum
         {
-            get { chosenword.InvokePropertyChanged(); return NumOfTries + 1; }
+            get
+            {
+                chosenword.InvokePropertyChanged();
+                chosenword.InvokePropertyChanged("PictureLocationWinForms");
+                return NumOfTries + 1;
+            }
 
         }
 
         public string StartGame(int amntofletters)
         {
             chosenword.AmntOfLetters = amntofletters;
+            ActiveTxtBoxesLst = chosenword.ActiveTextBoxes;
             NumOfTries = 12;
             return chosenword.ChooseNewWord();
         }
@@ -76,7 +80,7 @@ namespace HangmanSystem
                 {
                     if (chosenword.GuessingWord[i].ToString().ToLower() == letter.ToString())
                     {
-                        chosenword.TextBoxesLst[i] = letter;
+                        chosenword.ActiveTextBoxes[i] = letter;
                     }
                 }
                 CheckForWin();
@@ -91,14 +95,14 @@ namespace HangmanSystem
 
         public void EndGame()
         {
-            chosenword.TextBoxesLst.Clear();
+            chosenword.ActiveTextBoxes.Clear();
             chosenword.AmntOfLetters = 0;
             NumOfTries = 0;
         }
 
         public void CheckForWin()
         {
-            if (chosenword.TextBoxesLst.All(t => t != ""))
+            if (chosenword.ActiveTextBoxes.All(t => t != ""))
             {
                 GameStatus = GameStatusEnum.Won;
                 Game game = new();

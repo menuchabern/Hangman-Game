@@ -73,8 +73,8 @@
             btnA = new Button();
             btnB = new Button();
             btnC = new Button();
-            picGallows = new PictureBox();
             lblMessage = new Label();
+            picGallows = new PictureBox();
             tblMain.SuspendLayout();
             tblLeft.SuspendLayout();
             tblToolbar.SuspendLayout();
@@ -688,17 +688,6 @@
             btnC.Text = "C";
             btnC.UseVisualStyleBackColor = true;
             // 
-            // picGallows
-            // 
-            picGallows.Dock = DockStyle.Fill;
-            picGallows.Image = (Image)resources.GetObject("picGallows.Image");
-            picGallows.Location = new Point(672, 3);
-            picGallows.Name = "picGallows";
-            picGallows.Size = new Size(427, 638);
-            picGallows.SizeMode = PictureBoxSizeMode.Zoom;
-            picGallows.TabIndex = 1;
-            picGallows.TabStop = false;
-            // 
             // lblMessage
             // 
             lblMessage.AutoSize = true;
@@ -710,6 +699,17 @@
             lblMessage.Size = new Size(657, 254);
             lblMessage.TabIndex = 3;
             lblMessage.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // picGallows
+            // 
+            picGallows.Dock = DockStyle.Fill;
+            picGallows.Image = (Image)resources.GetObject("picGallows.Image");
+            picGallows.Location = new Point(672, 3);
+            picGallows.Name = "picGallows";
+            picGallows.Size = new Size(427, 638);
+            picGallows.SizeMode = PictureBoxSizeMode.Zoom;
+            picGallows.TabIndex = 1;
+            picGallows.TabStop = false;
             // 
             // frmHangman
             // 

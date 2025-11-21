@@ -10,7 +10,8 @@ namespace HangmanSystem
 
         private List<Word> GnuicWordsLst = gnuciDictionary.EnglishDictionary.GetAllWords().ToList();
         private List<String> WordLst = new();
-        public List<String> TextBoxesLst { get; private set; } = new();
+        internal BindingList<String> ActiveTextBoxes { get; private set; } = new();
+
 
         public ChosenWord()
         {
@@ -26,9 +27,10 @@ namespace HangmanSystem
 
             for (int i = 0; i < AmntOfLetters; i++)
             {
-                TextBoxesLst.Add("");
+                ActiveTextBoxes.Add("");
             }
 
+            InvokePropertyChanged("ActiveTextBoxes");
             return GuessingWord;
         }
 
