@@ -9,9 +9,9 @@
                 <Button Text="Start" x:Name="btnStart" Grid.Column="0" Clicked="btnStart_Clicked"/>
                 <Label Text="How Many Letters:" VerticalOptions="Center" HorizontalTextAlignment="End"  Grid.Column="1"/>
                 <Entry x:Name="txtHowManyLetters" MaximumHeightRequest="70" MinimumWidthRequest="100" Margin="10,10" Grid.Column="2"/>
-                <Label x:Name="lblTriesLeft" Text="12 Tries Left" VerticalOptions="Center" Grid.Column="3" BindingContext="{Binding NumOfTriesDescription}"/>
+                <Label x:Name="lblTriesLeft" VerticalOptions="Center" Grid.Column="3" Text="{Binding NumOfTriesDescription}"/>
             </Grid>
-            <Label TextColor="Red" MinimumHeightRequest="80" BindingContext="{Binding GameMessage}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30"/>
+            <Label TextColor="Red" MinimumHeightRequest="80" Text="{Binding GameMessage}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30"/>
             <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*" RowDefinitions="90" Margin="30">
                 <Grid.Resources>
                     <Style TargetType="Entry">
@@ -21,17 +21,16 @@
                         <Setter Property="IsReadOnly" Value="True"/>
                     </Style>
                 </Grid.Resources>
-                <Entry Grid.Column="0" Grid.Row="0" x:Name="txt1" BindingContext="{Binding letterboxes[0]}" Text="{Binding Text}" BackgroundColor="{Binding BackColorMaui}"/>
-                <Entry Grid.Column="1" Grid.Row="0" x:Name="txt2" BindingContext="{Binding letterboxes[1]}" Text="{Binding Text}" BackgroundColor="{Binding BackColorMaui}"/>
-                <Entry Grid.Column="2" Grid.Row="0" x:Name="txt3" BindingContext="{Binding letterboxes[2]}" Text="{Binding Text}" BackgroundColor="{Binding BackColorMaui}"/>
-                <Entry Grid.Column="3" Grid.Row="0" x:Name="txt4" BindingContext="{Binding letterboxes[3]}" Text="{Binding Text}" BackgroundColor="{Binding BackColorMaui}"/>
-                <Entry Grid.Column="4" Grid.Row="0" x:Name="txt5" BindingContext="{Binding letterboxes[4]}" Text="{Binding Text}" BackgroundColor="{Binding BackColorMaui}"/>
-                <Entry Grid.Column="5" Grid.Row="0" x:Name="txt6" BindingContext="{Binding letterboxes[5]}" Text="{Binding Text}" BackgroundColor="{Binding BackColorMaui}"/>
-                <Entry Grid.Column="6" Grid.Row="0" x:Name="txt7" BindingContext="{Binding letterboxes[6]}" Text="{Binding Text}" BackgroundColor="{Binding BackColorMaui}"/>
-                <Entry Grid.Column="7" Grid.Row="0" x:Name="txt8" BindingContext="{Binding letterboxes[7]}" Text="{Binding Text}" BackgroundColor="{Binding BackColorMaui}"/>
-                <Entry Grid.Column="8" Grid.Row="0" x:Name="txt9" BindingContext="{Binding letterboxes[8]}" Text="{Binding Text}" BackgroundColor="{Binding BackColorMaui}"/>
+                <Entry Grid.Column="0" Grid.Row="0" x:Name="txt1" BindingContext="{Binding Path=LetterBoxes[0]}" Text="{Binding Text}" BackgroundColor="{Binding MauiBackColor}"/>
+                <Entry Grid.Column="1" Grid.Row="0" x:Name="txt2" BindingContext="{Binding Path=LetterBoxes[1]}" Text="{Binding Text}" BackgroundColor="{Binding MauiBackColor}"/>
+                <Entry Grid.Column="2" Grid.Row="0" x:Name="txt3" BindingContext="{Binding Path=LetterBoxes[2]}" Text="{Binding Text}" BackgroundColor="{Binding MauiBackColor}"/>
+                <Entry Grid.Column="3" Grid.Row="0" x:Name="txt4" BindingContext="{Binding Path=LetterBoxes[3]}" Text="{Binding Text}" BackgroundColor="{Binding MauiBackColor}"/>
+                <Entry Grid.Column="4" Grid.Row="0" x:Name="txt5" BindingContext="{Binding Path=LetterBoxes[4]}" Text="{Binding Text}" BackgroundColor="{Binding MauiBackColor}"/>
+                <Entry Grid.Column="5" Grid.Row="0" x:Name="txt6" BindingContext="{Binding Path=LetterBoxes[5]}" Text="{Binding Text}" BackgroundColor="{Binding MauiBackColor}"/>
+                <Entry Grid.Column="6" Grid.Row="0" x:Name="txt7" BindingContext="{Binding Path=LetterBoxes[6]}" Text="{Binding Text}" BackgroundColor="{Binding MauiBackColor}"/>
+                <Entry Grid.Column="7" Grid.Row="0" x:Name="txt8" BindingContext="{Binding Path=LetterBoxes[7]}" Text="{Binding Text}" BackgroundColor="{Binding MauiBackColor}"/>
+                <Entry Grid.Column="8" Grid.Row="0" x:Name="txt9" BindingContext="{Binding Path=LetterBoxes[8]}" Text="{Binding Text}" BackgroundColor="{Binding MauiBackColor}"/>
             </Grid>
-
             <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*" RowDefinitions="*,*,*" VerticalOptions="End" ColumnSpacing="5" RowSpacing="5" Margin="10">
                 <Grid.Resources>
                     <Style TargetType="Button">
@@ -70,6 +69,6 @@
                 </Grid>
             </Grid>
         </VerticalStackLayout>
-        <Image Source="{Binding Path=[PicNumMaui], StringFormat='p{0}p.png'}" Grid.Column="1"/>
+        <Image Source="{Binding PicNumMaui, StringFormat='p{0}p.png'}" Grid.Column="1"/>
     </Grid>
 </ContentPage>

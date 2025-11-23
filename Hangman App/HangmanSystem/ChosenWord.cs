@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 namespace HangmanSystem
 {
-    public class ChosenWord : INotifyPropertyChanged
+    internal class ChosenWord : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -12,22 +12,22 @@ namespace HangmanSystem
         private List<String> WordLst = new();
 
 
-        public ChosenWord()
+        internal ChosenWord()
         {
             WordLst = GnuicWordsLst.Select(w => w.Value.ToString()).ToList();
         }
         
-        public int AmntOfLetters { internal get; set; }
+        internal int AmntOfLetters { get; set; }
         internal string GuessingWord;
         
-        public string ChooseNewWord()
+        internal string ChooseNewWord()
         {
             GuessingWord = WordLst.Where(w => w.Length == AmntOfLetters).Random().ToLower();
             InvokePropertyChanged("ActiveTextBoxes");
             return GuessingWord;
         }
 
-        internal void InvokePropertyChanged([CallerMemberName] string propertyname = "")
+        private void InvokePropertyChanged([CallerMemberName] string propertyname = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }

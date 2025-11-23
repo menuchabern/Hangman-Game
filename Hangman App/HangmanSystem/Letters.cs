@@ -19,9 +19,10 @@ namespace HangmanSystem
                 InvokePropertyChanged("MauiBackColor");
             }
         }
-        public System.Drawing.Color ActiveColor = System.Drawing.Color.LightYellow;
 
-        internal void InvokePropertyChanged([CallerMemberName] string propertyname = "")
+        internal System.Drawing.Color ActiveColor = System.Drawing.Color.LightYellow;
+
+        private void InvokePropertyChanged([CallerMemberName] string propertyname = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }

@@ -1,8 +1,4 @@
-using gnuciDictionary;
 using HangmanSystem;
-using Microsoft.VisualBasic;
-using NUnit.Framework.Internal.Execution;
-using static HangmanSystem.ChosenWord;
 
 namespace HangmanTest
 {
@@ -16,10 +12,10 @@ namespace HangmanTest
         [Test]
         public void GetWord()
         {
-            ChosenWord word = new();
-            word.AmntOfLetters = 7;
+            Game game = new();
+            int amntofletters = 7;
             string guessingword = "";
-            guessingword = word.ChooseNewWord();
+            guessingword = game.StartGame(amntofletters);
             string msg = $"the word is {guessingword}, the the amount of letters in the word({guessingword.Length.ToString()}) should equal 7";
             Assert.IsTrue(guessingword != "" && guessingword.Length == 7, msg);
             TestContext.WriteLine(msg);
@@ -33,8 +29,8 @@ namespace HangmanTest
             string guessingword = game.StartGame(amntletters);
             string letter = guessingword[4].ToString();
             game.CheckWordIfLetter(letter);
-            string msg = $"the word has {guessingword.Length} = {game.letterboxes.Count} letters. and the letter {letter} was chosen and {guessingword} should contain a {letter}";
-            Assert.IsTrue(game.letterboxes[4].Text == letter && game.letterboxes.Count == guessingword.Length, msg);
+            string msg = $"the word has {guessingword.Length} = {game.LetterBoxes.Count} letters. and the letter {letter} was chosen and {guessingword} should contain a {letter}";
+            Assert.IsTrue(game.LetterBoxes[4].Text == letter && game.LetterBoxes.Count == guessingword.Length, msg);
             TestContext.WriteLine(msg);
         }
 
@@ -65,7 +61,6 @@ namespace HangmanTest
             game.CheckWordIfLetter(letter2);
             string letter3 = guessingword[2].ToString();
             game.CheckWordIfLetter(letter3);
-            game.CheckForWin();
             string msg = $"the word was {guessingword} and {letter1}, {letter2} and {letter3} were guessed so the game status is {game.GameMessage}";
             Assert.IsTrue(game.GameMessage == "You Won!", msg);
             TestContext.WriteLine(msg);
@@ -85,8 +80,6 @@ namespace HangmanTest
                 {
                     game.CheckWordIfLetter(letter.ToString());
                     if (guessingword.Contains(letter.ToString()) == false) { timestried++; }
-                    game.CheckForWin();
-                    game.CheckForLose();
                 }
             }
             string basicmsg = $"num of tries = {timestried}, word = {guessingword}, Message = {game.GameMessage}";

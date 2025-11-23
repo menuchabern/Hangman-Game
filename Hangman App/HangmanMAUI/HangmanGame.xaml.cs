@@ -12,9 +12,11 @@ public partial class HangmanGame : ContentPage
 	{
 		InitializeComponent();
         lstletterbtn = new() { btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ };
+        lstletterbtn.ForEach(b => b.IsEnabled = false);
+
         lsttxt = new() { txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9 };
-        btnStart.Clicked += btnStart_Clicked;
-	}
+        BindingContext = game;
+    }
 
     private bool CheckIfNumOfLettersValid()
     {
@@ -24,13 +26,13 @@ public partial class HangmanGame : ContentPage
         {
             DisplayAlert("Hangman", "Please choose a number less than or equal to 9", "OK");
             txtHowManyLetters.Text = "";
-            b = false;
+            return false;
         }
         else if (correctnumber == false || txtHowManyLetters.Text == "0")
         {
             txtHowManyLetters.Text = "";
             DisplayAlert("Hangman", "Please choose a valid number", "OK");
-            b = false;
+            return false;
         }
         return b;
     }
@@ -46,7 +48,7 @@ public partial class HangmanGame : ContentPage
         foreach (Entry item in lsttxt.Take(amntofletters))
         {
             int indexof = lsttxt.IndexOf(item);
-            Letters letter = game.letterboxes[indexof];
+            Letters letter = game.LetterBoxes[indexof];
         }
         btnStart.IsEnabled = false;
     }
@@ -59,10 +61,10 @@ public partial class HangmanGame : ContentPage
 
         if (game.GameMessage != "")
         {
-            lsttxt.ForEach(t =>
-            {
-                t.Text = "";
-            });
+            //lsttxt.ForEach(t =>
+            //{
+            //    t.Text = "";
+            //});
             lstletterbtn.ForEach(b => b.IsEnabled = false);
             btnStart.IsEnabled = true;
         }

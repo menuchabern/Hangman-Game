@@ -1,8 +1,5 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
-using System.IO;
 using System.Runtime.CompilerServices;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace HangmanSystem
 {
@@ -11,20 +8,15 @@ namespace HangmanSystem
         ChosenWord chosenword = new();
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        public enum GameStatusEnum { Playing, Won, Lost };
+        private enum GameStatusEnum { Playing, Won, Lost };
         private int _numoftries = 12;
         private GameStatusEnum _gamestatus;
         private List<Letters> _letterboxes = new();
-        public List<Letters> letterboxes
+        public List<Letters> LetterBoxes
         {
             get => _letterboxes;
             set
             {
-                for (int i = 0; i < chosenword.AmntOfLetters; i++)
-                {
-                    Letters letter = new();
-                    letterboxes.Add(letter);
-                }
                 _letterboxes = value;
                 InvokePropertyChanged();
             }
@@ -48,7 +40,7 @@ namespace HangmanSystem
 
         public int PicNumMaui { get => NumOfTries + 1; }
 
-        public int NumOfTries
+        private int NumOfTries
         {
             get => _numoftries;
             set
@@ -67,7 +59,7 @@ namespace HangmanSystem
             get => NumOfTries.ToString() + " Tries Left";
         }
 
-        public GameStatusEnum GameStatus
+        private GameStatusEnum GameStatus
         {
             get => _gamestatus;
             set
@@ -80,12 +72,14 @@ namespace HangmanSystem
 
         public string StartGame(int amntofletters)
         {
+            LetterBoxes.Clear();
             chosenword.AmntOfLetters = amntofletters;
             for (int i = 0; i < amntofletters; i++)
             {
                 Letters letter = new();
-                letterboxes.Add(letter);
+                LetterBoxes.Add(letter);
                 letter.BackColorWinForms = letter.ActiveColor;
+                InvokePropertyChanged("LetterBoxes");
             }
             NumOfTries = 12;
             GameStatus = GameStatusEnum.Playing;
@@ -100,7 +94,7 @@ namespace HangmanSystem
                 {
                     if (chosenword.GuessingWord[i].ToString().ToLower() == letter.ToLower())
                     {
-                        letterboxes[i].Text = letter;
+                        LetterBoxes[i].Text = letter;
                     }
                 }
                 CheckForWin();
@@ -112,27 +106,26 @@ namespace HangmanSystem
             }
         }
 
-        public void EndGame()
-        {
-            letterboxes.Clear();
-            chosenword.AmntOfLetters = 0;
-        }
+        //private void EndGame()
+        //{
+        //    chosenword.AmntOfLetters = 0;
+        //}
 
-        public void CheckForWin()
+        private void CheckForWin()
         {
-            if (letterboxes.All(t => t.Text != ""))
+            if (LetterBoxes.All(t => t.Text != ""))
             {
                 GameStatus = GameStatusEnum.Won;
-                EndGame();
+                //EndGame();
             }
         }
 
-        public void CheckForLose()
+        private void CheckForLose()
         {
             if (NumOfTries == 0)
             {
                 GameStatus = GameStatusEnum.Lost;
-                EndGame();
+                //EndGame();
             }
         }
 

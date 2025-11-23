@@ -21,7 +21,6 @@ namespace Hangman_App
             btnStart.Click += BtnStart_Click;
         }
 
-
         private bool CheckIfNumOfLettersValid()
         {
             bool b = true;
@@ -51,11 +50,10 @@ namespace Hangman_App
 
             foreach (TextBox item in lsttxt.Take(amntofletters))
             {
-                Letters letter = game.letterboxes[lsttxt.IndexOf(item)];
+                Letters letter = game.LetterBoxes[lsttxt.IndexOf(item)];
                 item.DataBindings.Clear();
                 item.DataBindings.Add("Text", letter, "Text");
                 item.DataBindings.Add("BackColor", letter, "BackColorWinForms");
-                //item.BorderStyle = BorderStyle.FixedSingle;
             }
             btnStart.Enabled = false;
         }
@@ -68,11 +66,6 @@ namespace Hangman_App
 
             if (game.GameMessage != "")
             {
-                lsttxt.ForEach(t =>
-                {
-                    t.BorderStyle = BorderStyle.None;
-                    t.Text = "";
-                });
                 lstletterbtn.ForEach(b => b.Enabled = false);
                 btnStart.Enabled = true;
             }
