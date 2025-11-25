@@ -50,7 +50,6 @@ public partial class HangmanGame : ContentPage
             int indexof = lsttxt.IndexOf(item);
             Letters letter = game.LetterBoxes[indexof];
         }
-        btnStart.IsEnabled = false;
     }
 
     private void btn_Clicked(object sender, EventArgs e)
@@ -61,12 +60,7 @@ public partial class HangmanGame : ContentPage
 
         if (game.GameMessage != "")
         {
-            //lsttxt.ForEach(t =>
-            //{
-            //    t.Text = "";
-            //});
             lstletterbtn.ForEach(b => b.IsEnabled = false);
-            btnStart.IsEnabled = true;
         }
     }
 }

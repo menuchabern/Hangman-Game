@@ -146,7 +146,7 @@
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(193, 46);
             btnStart.TabIndex = 0;
-            btnStart.Text = "Start";
+            btnStart.Text = "Start New Game";
             btnStart.UseVisualStyleBackColor = true;
             // 
             // lblHowManyLetters

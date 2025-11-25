@@ -55,7 +55,6 @@ namespace Hangman_App
                 item.DataBindings.Add("Text", letter, "Text");
                 item.DataBindings.Add("BackColor", letter, "BackColorWinForms");
             }
-            btnStart.Enabled = false;
         }
 
         private void LetterBtn_Click(object? sender, EventArgs e)
@@ -67,7 +66,6 @@ namespace Hangman_App
             if (game.GameMessage != "")
             {
                 lstletterbtn.ForEach(b => b.Enabled = false);
-                btnStart.Enabled = true;
             }
         }
     }
