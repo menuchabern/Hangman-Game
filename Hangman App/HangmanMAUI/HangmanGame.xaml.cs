@@ -1,21 +1,31 @@
 using HangmanSystem;
 
 namespace HangmanMAUI;
-
 public partial class HangmanGame : ContentPage
 {
     List<Button> lstletterbtn;
     List<Entry> lsttxt;
-    Game game = new();
+    Game activegame;
+    List<Game> lstgame = new() { new Game(), new Game() };
 
     public HangmanGame()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
+        lstgame.ForEach(g => g.ScoreChanged += G_ScoreChanged);
         lstletterbtn = new() { btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ };
         lstletterbtn.ForEach(b => b.IsEnabled = false);
 
+        Game1Rb.BindingContext = lstgame[0];
+        Game2Rb.BindingContext = lstgame[1];
+        activegame = lstgame[0];
+        BindingContext = activegame;
+
         lsttxt = new() { txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9 };
-        BindingContext = game;
+    }
+
+    private void G_ScoreChanged(object? sender, EventArgs e)
+    {
+        ScoreLbl.Text = Game.ScoreDescription;
     }
 
     private bool CheckIfNumOfLettersValid()
@@ -42,13 +52,13 @@ public partial class HangmanGame : ContentPage
         int amntofletters;
         int.TryParse(txtHowManyLetters.Text, out amntofletters);
         if (CheckIfNumOfLettersValid() == false) return;
-        game.StartGame(amntofletters);
+        activegame.StartGame(amntofletters);
         lstletterbtn.ForEach(b => b.IsEnabled = true);
 
         foreach (Entry item in lsttxt.Take(amntofletters))
         {
             int indexof = lsttxt.IndexOf(item);
-            Letters letter = game.LetterBoxes[indexof];
+            Letters letter = activegame.LetterBoxes[indexof];
         }
     }
 
@@ -56,11 +66,31 @@ public partial class HangmanGame : ContentPage
     {
         Button btnletter = (Button)sender;
         btnletter.IsEnabled = false;
-        game.CheckWordIfLetter(btnletter.Text);
+        activegame.CheckWordIfLetter(btnletter.Text);
 
-        if (game.GameMessage != "")
+        if (activegame.GameMessage != "")
         {
             lstletterbtn.ForEach(b => b.IsEnabled = false);
+        }
+    }
+
+    private void Game_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        RadioButton rb = (RadioButton)sender;
+        if (rb.IsChecked && rb.BindingContext != null)
+        {
+            activegame = (Game)rb.BindingContext;
+            this.BindingContext = activegame;
+        }
+
+        if (activegame.GameMessage != "")
+        {
+            lstletterbtn.ForEach(b => b.IsEnabled = false);
+        }
+        else
+        {
+            lstletterbtn.ForEach(b => b.IsEnabled = true);
+
         }
     }
 }

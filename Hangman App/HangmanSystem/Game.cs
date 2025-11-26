@@ -8,10 +8,29 @@ namespace HangmanSystem
         ChosenWord chosenword = new();
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        private enum GameStatusEnum { Playing, Won, Lost };
+        public event EventHandler? ScoreChanged;
+
+        private enum GameStatusEnum { Playing, Won, Lost, None };
         private int _numoftries = 12;
         private GameStatusEnum _gamestatus;
         private List<Letters> _letterboxes = new();
+        private static int numofgames;
+        private int _gamenumber;
+        private int GameNumber
+        {
+            get => _gamenumber; set
+            {
+                _gamenumber = value;
+                InvokePropertyChanged();
+            }
+        }
+
+        public Game()
+        {
+            numofgames++;
+            GameNumber = numofgames;
+            GameStatus = GameStatusEnum.None;
+        }
         public List<Letters> LetterBoxes
         {
             get => _letterboxes;
@@ -21,6 +40,9 @@ namespace HangmanSystem
                 InvokePropertyChanged();
             }
         }
+        private static int scorewin = 0;
+        private static int scorelose = 0;
+        public static string ScoreDescription { get => scorewin.ToString() + " Games Won, " + scorelose + " Games Lost"; }
         public string PictureLocationWinForms { get => AppDomain.CurrentDomain.BaseDirectory + @"pics\" + (NumOfTries + 1) + ".png"; }
         public string GameMessage
         {
@@ -35,6 +57,15 @@ namespace HangmanSystem
                     default:
                         return "";
                 }
+            }
+        }
+        public string GameStartDescription
+        {
+            get
+            {
+                string s = "Start";
+                if (GameStatus == GameStatusEnum.Playing) { s = "Restart"; }
+                return s + " Game " + GameNumber;
             }
         }
 
@@ -67,6 +98,7 @@ namespace HangmanSystem
                 _gamestatus = value;
                 InvokePropertyChanged();
                 InvokePropertyChanged("GameMessage");
+                InvokePropertyChanged("GameStartDescription");
             }
         }
 
@@ -106,17 +138,13 @@ namespace HangmanSystem
             }
         }
 
-        //private void EndGame()
-        //{
-        //    chosenword.AmntOfLetters = 0;
-        //}
-
         private void CheckForWin()
         {
             if (LetterBoxes.All(t => t.Text != ""))
             {
                 GameStatus = GameStatusEnum.Won;
-                //EndGame();
+                scorewin++;
+                ScoreChanged?.Invoke(this, new EventArgs());
             }
         }
 
@@ -125,7 +153,8 @@ namespace HangmanSystem
             if (NumOfTries == 0)
             {
                 GameStatus = GameStatusEnum.Lost;
-                //EndGame();
+                scorelose++;
+                ScoreChanged?.Invoke(this, new EventArgs());
             }
         }
 
