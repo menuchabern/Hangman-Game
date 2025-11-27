@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HangmanMAUI.HangmanGame"
              Title="Hangman Game">
-    <Grid RowDefinitions="Auto,Auto,*,2*,Auto" ColumnDefinitions="3*,2*">
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto" ColumnDefinitions="3*,2*">
         <Grid Grid.Row="0" Grid.Column="0" ColumnDefinitions="Auto,1.3*,*,*,*" Margin="10" ColumnSpacing="20" HorizontalOptions="Center">
             <Button Text="{Binding GameStartDescription}" x:Name="btnStart" Grid.Column="0" Clicked="btnStart_Clicked"/>
             <Label Text="How Many Letters:" VerticalOptions="Center" HorizontalTextAlignment="End"  Grid.Column="1"/>
-            <Entry x:Name="txtHowManyLetters" MaximumHeightRequest="70" MinimumWidthRequest="100" Margin="10,10" Grid.Column="2"/>
+            <Entry x:Name="txtHowManyLetters" MaximumHeightRequest="70" MinimumWidthRequest="100" Margin="10,10" Grid.Column="2" Text="{Binding AmntOfLetters}"/>
             <Label x:Name="lblTriesLeft" VerticalOptions="Center" Grid.Column="3" Text="{Binding NumOfTriesDescription}"/>
         </Grid>
         <HorizontalStackLayout Grid.Column="0" Grid.Row="1">
@@ -16,7 +16,7 @@
             <Label x:Name="ScoreLbl" VerticalOptions="Center" Padding="20,0"/>
         </HorizontalStackLayout>
         <Label Grid.Row="2" Grid.Column="0" TextColor="Red" MinimumHeightRequest="80" Text="{Binding GameMessage}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30"/>
-        <Grid Grid.Row="3" Grid.Column="0" ColumnDefinitions="*,*,*,*,*,*,*,*,*" RowDefinitions="90" Margin="30">
+        <Grid Grid.Row="3" Grid.Column="0" ColumnDefinitions="*,*,*,*,*,*,*,*,*">
             <Grid.Resources>
                 <Style TargetType="Entry">
                     <Setter Property="BackgroundColor" Value="White"/>
@@ -42,33 +42,33 @@
                     <Setter Property="MinimumHeightRequest" Value="70"/>
                 </Style>
             </Grid.Resources>
-            <Button Text="A" x:Name="btnA" Grid.Column="0" Grid.Row="0" Clicked="btn_Clicked"/>
-            <Button Text="B" x:Name="btnB" Grid.Column="1" Grid.Row="0" Clicked="btn_Clicked"/>
-            <Button Text="C" x:Name="btnC" Grid.Column="2" Grid.Row="0" Clicked="btn_Clicked"/>
-            <Button Text="D" x:Name="btnD" Grid.Column="3" Grid.Row="0" Clicked="btn_Clicked"/>
-            <Button Text="E" x:Name="btnE" Grid.Column="4" Grid.Row="0" Clicked="btn_Clicked"/>
-            <Button Text="F" x:Name="btnF" Grid.Column="5" Grid.Row="0" Clicked="btn_Clicked"/>
-            <Button Text="G" x:Name="btnG" Grid.Column="6" Grid.Row="0" Clicked="btn_Clicked"/>
-            <Button Text="H" x:Name="btnH" Grid.Column="7" Grid.Row="0" Clicked="btn_Clicked"/>
-            <Button Text="I" x:Name="btnI" Grid.Column="8" Grid.Row="0" Clicked="btn_Clicked"/>
-            <Button Text="J" x:Name="btnJ" Grid.Column="0" Grid.Row="1" Clicked="btn_Clicked"/>
-            <Button Text="K" x:Name="btnK" Grid.Column="1" Grid.Row="1" Clicked="btn_Clicked"/>
-            <Button Text="L" x:Name="btnL" Grid.Column="2" Grid.Row="1" Clicked="btn_Clicked"/>
-            <Button Text="M" x:Name="btnM" Grid.Column="3" Grid.Row="1" Clicked="btn_Clicked"/>
-            <Button Text="N" x:Name="btnN" Grid.Column="4" Grid.Row="1" Clicked="btn_Clicked"/>
-            <Button Text="O" x:Name="btnO" Grid.Column="5" Grid.Row="1" Clicked="btn_Clicked"/>
-            <Button Text="P" x:Name="btnP" Grid.Column="6" Grid.Row="1" Clicked="btn_Clicked"/>
-            <Button Text="Q" x:Name="btnQ" Grid.Column="7" Grid.Row="1" Clicked="btn_Clicked"/>
-            <Button Text="R" x:Name="btnR" Grid.Column="8" Grid.Row="1" Clicked="btn_Clicked"/>
+            <Button Text="A" x:Name="btnA" Grid.Column="0" Grid.Row="0" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[0]}"/>
+            <Button Text="B" x:Name="btnB" Grid.Column="1" Grid.Row="0" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[1]}"/>
+            <Button Text="C" x:Name="btnC" Grid.Column="2" Grid.Row="0" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[2]}"/>
+            <Button Text="D" x:Name="btnD" Grid.Column="3" Grid.Row="0" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[3]}"/>
+            <Button Text="E" x:Name="btnE" Grid.Column="4" Grid.Row="0" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[4]}"/>
+            <Button Text="F" x:Name="btnF" Grid.Column="5" Grid.Row="0" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[5]}"/>
+            <Button Text="G" x:Name="btnG" Grid.Column="6" Grid.Row="0" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[6]}"/>
+            <Button Text="H" x:Name="btnH" Grid.Column="7" Grid.Row="0" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[7]}"/>
+            <Button Text="I" x:Name="btnI" Grid.Column="8" Grid.Row="0" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[8]}"/>
+            <Button Text="J" x:Name="btnJ" Grid.Column="0" Grid.Row="1" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[9]}"/>
+            <Button Text="K" x:Name="btnK" Grid.Column="1" Grid.Row="1" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[10]}"/>
+            <Button Text="L" x:Name="btnL" Grid.Column="2" Grid.Row="1" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[11]}"/>
+            <Button Text="M" x:Name="btnM" Grid.Column="3" Grid.Row="1" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[12]}"/>
+            <Button Text="N" x:Name="btnN" Grid.Column="4" Grid.Row="1" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[13]}"/>
+            <Button Text="O" x:Name="btnO" Grid.Column="5" Grid.Row="1" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[14]}"/>
+            <Button Text="P" x:Name="btnP" Grid.Column="6" Grid.Row="1" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[15]}"/>
+            <Button Text="Q" x:Name="btnQ" Grid.Column="7" Grid.Row="1" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[16]}"/>
+            <Button Text="R" x:Name="btnR" Grid.Column="8" Grid.Row="1" Clicked="btn_Clicked" IsEnabled="{Binding ABCButtonsEnabled[17]}"/>
             <Grid ColumnDefinitions="*,*,*,*,*,*,*,*" RowDefinitions="*" Grid.Row="2" Grid.ColumnSpan="9" ColumnSpacing="5" RowSpacing="5">
-                <Button Text="S" x:Name="btnS" Grid.Column="0" Grid.Row="0" Clicked="btn_Clicked"/>
-                <Button Text="T" x:Name="btnT" Grid.Column="1" Grid.Row="0" Clicked="btn_Clicked"/>
-                <Button Text="U" x:Name="btnU" Grid.Column="2" Grid.Row="0" Clicked="btn_Clicked"/>
-                <Button Text="V" x:Name="btnV" Grid.Column="3" Grid.Row="0" Clicked="btn_Clicked"/>
-                <Button Text="W" x:Name="btnW" Grid.Column="4" Grid.Row="0" Clicked="btn_Clicked"/>
-                <Button Text="X" x:Name="btnX" Grid.Column="5" Grid.Row="0" Clicked="btn_Clicked"/>
-                <Button Text="Y" x:Name="btnY" Grid.Column="6" Grid.Row="0" Clicked="btn_Clicked"/>
-                <Button Text="Z" x:Name="btnZ" Grid.Column="7" Grid.Row="0" Clicked="btn_Clicked"/>
+                <Button Text="S" x:Name="btnS" Grid.Column="0" Grid.Row="0" Clicked="btn_Clicked"  IsEnabled="{Binding ABCButtonsEnabled[18]}"/>
+                <Button Text="T" x:Name="btnT" Grid.Column="1" Grid.Row="0" Clicked="btn_Clicked"  IsEnabled="{Binding ABCButtonsEnabled[19]}"/>
+                <Button Text="U" x:Name="btnU" Grid.Column="2" Grid.Row="0" Clicked="btn_Clicked"  IsEnabled="{Binding ABCButtonsEnabled[20]}"/>
+                <Button Text="V" x:Name="btnV" Grid.Column="3" Grid.Row="0" Clicked="btn_Clicked"  IsEnabled="{Binding ABCButtonsEnabled[21]}"/>
+                <Button Text="W" x:Name="btnW" Grid.Column="4" Grid.Row="0" Clicked="btn_Clicked"  IsEnabled="{Binding ABCButtonsEnabled[22]}"/>
+                <Button Text="X" x:Name="btnX" Grid.Column="5" Grid.Row="0" Clicked="btn_Clicked"  IsEnabled="{Binding ABCButtonsEnabled[23]}"/>
+                <Button Text="Y" x:Name="btnY" Grid.Column="6" Grid.Row="0" Clicked="btn_Clicked"  IsEnabled="{Binding ABCButtonsEnabled[24]}"/>
+                <Button Text="Z" x:Name="btnZ" Grid.Column="7" Grid.Row="0" Clicked="btn_Clicked"  IsEnabled="{Binding ABCButtonsEnabled[25]}"/>
 
             </Grid>
         </Grid>

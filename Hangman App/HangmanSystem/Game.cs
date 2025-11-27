@@ -16,6 +16,14 @@ namespace HangmanSystem
         private List<Letters> _letterboxes = new();
         private static int numofgames;
         private int _gamenumber;
+        private List<bool> _abcbuttonsenabled = Enumerable.Repeat(false, 26).ToList();
+        private string _amnofletters = "";
+        public Game()
+        {
+            numofgames++;
+            GameNumber = numofgames;
+            GameStatus = GameStatusEnum.None;
+        }
         private int GameNumber
         {
             get => _gamenumber; set
@@ -24,13 +32,21 @@ namespace HangmanSystem
                 InvokePropertyChanged();
             }
         }
-
-        public Game()
+        public List<bool> ABCButtonsEnabled
         {
-            numofgames++;
-            GameNumber = numofgames;
-            GameStatus = GameStatusEnum.None;
+            get => _abcbuttonsenabled;
+            set
+            {
+                _abcbuttonsenabled = value;
+            }
         }
+
+        public void SetABCButtonEnabled(int index, bool value)
+        {
+            _abcbuttonsenabled[index] = value;
+            InvokePropertyChanged(nameof(ABCButtonsEnabled));
+        }
+
         public List<Letters> LetterBoxes
         {
             get => _letterboxes;
@@ -40,6 +56,13 @@ namespace HangmanSystem
                 InvokePropertyChanged();
             }
         }
+
+        public string AmntOfLetters
+        {
+            get => _amnofletters;
+            set { _amnofletters = value; InvokePropertyChanged(); }
+        }
+
         private static int scorewin = 0;
         private static int scorelose = 0;
         public static string ScoreDescription { get => scorewin.ToString() + " Games Won, " + scorelose + " Games Lost"; }
@@ -112,6 +135,10 @@ namespace HangmanSystem
                 LetterBoxes.Add(letter);
                 letter.BackColorWinForms = letter.ActiveColor;
                 InvokePropertyChanged("LetterBoxes");
+            }
+            for (int i = 0; i < ABCButtonsEnabled.Count; i++)
+            {
+                SetABCButtonEnabled(i, true);
             }
             NumOfTries = 12;
             GameStatus = GameStatusEnum.Playing;

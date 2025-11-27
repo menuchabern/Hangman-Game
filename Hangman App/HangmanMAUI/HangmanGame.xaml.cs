@@ -13,7 +13,6 @@ public partial class HangmanGame : ContentPage
         InitializeComponent();
         lstgame.ForEach(g => g.ScoreChanged += G_ScoreChanged);
         lstletterbtn = new() { btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ };
-        lstletterbtn.ForEach(b => b.IsEnabled = false);
 
         Game1Rb.BindingContext = lstgame[0];
         Game2Rb.BindingContext = lstgame[1];
@@ -53,7 +52,6 @@ public partial class HangmanGame : ContentPage
         int.TryParse(txtHowManyLetters.Text, out amntofletters);
         if (CheckIfNumOfLettersValid() == false) return;
         activegame.StartGame(amntofletters);
-        lstletterbtn.ForEach(b => b.IsEnabled = true);
 
         foreach (Entry item in lsttxt.Take(amntofletters))
         {
@@ -65,13 +63,10 @@ public partial class HangmanGame : ContentPage
     private void btn_Clicked(object sender, EventArgs e)
     {
         Button btnletter = (Button)sender;
-        btnletter.IsEnabled = false;
         activegame.CheckWordIfLetter(btnletter.Text);
 
-        if (activegame.GameMessage != "")
-        {
-            lstletterbtn.ForEach(b => b.IsEnabled = false);
-        }
+        int indexof = lstletterbtn.IndexOf((Button)sender);
+        activegame.SetABCButtonEnabled(indexof, false);
     }
 
     private void Game_CheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -81,16 +76,6 @@ public partial class HangmanGame : ContentPage
         {
             activegame = (Game)rb.BindingContext;
             this.BindingContext = activegame;
-        }
-
-        if (activegame.GameMessage != "")
-        {
-            lstletterbtn.ForEach(b => b.IsEnabled = false);
-        }
-        else
-        {
-            lstletterbtn.ForEach(b => b.IsEnabled = true);
-
         }
     }
 }
