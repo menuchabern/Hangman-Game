@@ -172,6 +172,7 @@ namespace HangmanSystem
                 GameStatus = GameStatusEnum.Won;
                 scorewin++;
                 ScoreChanged?.Invoke(this, new EventArgs());
+                EndGame();
             }
         }
 
@@ -182,6 +183,17 @@ namespace HangmanSystem
                 GameStatus = GameStatusEnum.Lost;
                 scorelose++;
                 ScoreChanged?.Invoke(this, new EventArgs());
+                EndGame();
+            }
+        }
+
+        private void EndGame()
+        {
+
+            for (int i = 0; i < ABCButtonsEnabled.Count; i++)
+            {
+                SetABCButtonEnabled(i,false);
+                //GameStatus = GameStatusEnum.None;
             }
         }
 
