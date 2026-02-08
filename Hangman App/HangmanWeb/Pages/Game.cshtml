@@ -11,54 +11,52 @@
             </div>
             <div class="col-3 text-end fw-semibold">How Many Letters:</div>
             <div class="col-2">
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" id="anmtletters" />
             </div>
 
-            <div class="col-3 fw-semibold">-- tries left</div>
+            <div class="col-3 fw-semibold" id="triesleft">-- tries left</div>
         </div>
         <div class="col">
             <div class="row mt-5">
-                <input type="text" value="" class="col form-control m-1 border-primary" style="min-height:70px" />
-                <input type="text" value="" class="col form-control m-1 border-primary" style="min-height:70px" />
-                <input type="text" value="" class="col form-control m-1 border-primary" style="min-height:70px" />
-                <input type="text" value="" class="col form-control m-1 border-primary" style="min-height:70px" />
-                <input type="text" value="" class="col form-control m-1 border-primary" style="min-height:70px" />
-                <input type="text" value="" class="col form-control m-1 border-primary" style="min-height:70px" />
-                <input type="text" value="" class="col form-control m-1 border-primary" style="min-height:70px" />
-                <input type="text" value="" class="col form-control m-1 border-primary" style="min-height:70px" />
-                <input type="text" value="" class="col form-control m-1 border-primary" style="min-height:70px" />
+                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g1"/>
+                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g2"/>
+                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g3"/>
+                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g4"/>
+                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g5"/>
+                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g6"/>
+                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g7"/>
+                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g8"/>
+                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g9"/>
             </div>
         </div>
         <div class="col mt-5">
-            <div class="col">
-                <button type="button" class="btn btn-light" style="min-width:50px">A</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">B</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">C</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">D</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">E</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">F</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">G</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">H</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">I</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">J</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">K</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">L</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">M</button>
-            </div>
-            <div class="col mt-2">
-                <button type="button" class="btn btn-light" style="min-width:50px">N</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">O</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">P</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">Q</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">R</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">S</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">T</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">U</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">V</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">W</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">X</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">Y</button>
-                <button type="button" class="btn btn-light" style="min-width:50px">Z</button>
+            <div class="row">
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="a">A</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="b">B</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="c">C</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="d">D</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="e">E</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="f">F</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="g">G</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="h">H</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="i">I</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="j">J</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="k">K</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="l">L</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="m">M</button>                                           
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="n">N</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="o">O</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="p">P</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="q">Q</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="r">R</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="s">S</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="t">T</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="u">U</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="v">V</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="w">W</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="x">X</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="y">Y</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="z">Z</button>
             </div>
         </div>
     </div>
@@ -66,3 +64,7 @@
         <img src="/images/p13p.png" class="img-fluid" style="max-height:600px" />
     </div>
 </div>
+
+<script>
+
+</script>
