@@ -1,0 +1,77 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <h4 class="text-body-secondary">
+        Hangman Spec
+    </h4>
+    <h1>
+        Hangman
+    </h1>
+    <h5 class="text">
+        Created by Menucha Bernstein
+    </h5>
+    <br />
+    <h5 class="text-body-secondary">Overview</h5>
+    <p>
+        This document describes requirements for the software implementation of the classic game of
+        Hangman. This software will allow a player to play against the computer, and try to guess the
+        word that the computer randomly chose, based on the player's specifications. A description of
+        this implementation is provided below.
+    </p>
+    <h5 class="text-body-secondary">
+        The Game
+    </h5>
+    <p>
+        The computer will choose a random word that is not displayed to the player. The only thing that is
+        shown to the player is the amount of letters in the word, displayed by blank boxes and an empty
+        gallow. The player then tries guessing letters that might be in the word. Every time the player
+        guesses correctly that character is filled in on the correct box. Every time the player gets a word
+        wrong a body part is added on to the gallows. The player has 12 guesses. The player wins if they
+        guess the whole word before the body on the gallows is complete.
+    </p>
+    <h5 class="text-body-secondary">
+        Software Implementation
+    </h5>
+    <h5 class="text-info">
+        UI Elements
+    </h5>
+    <ul>
+        <li>
+            A toolbar with a start button, a label displaying how many guesses the user has left and a
+            textbox for the user to choose how many letters it wants in the word, up to nine letters.
+        </li>
+        <li>A button for each letter in the alphabet. When the user chooses that character by clicking on it, the button will be disabled.</li>
+        <li>A box for each character in the word. The word will have max 9 letters.</li>
+        <li>Gallow, and as the user chooses incorrect letters, there will be body parts added on.</li>
+    </ul>
+    <h5 class="text-info">
+        Game Processes and Rules
+    </h5>
+    <ul>
+        <li>The game starts when the user clicks Start. Until then all the letter buttons are disabled.</li>
+        <li>
+            If the user fills in the textbox for the amount of letters they want in the word, the computer
+            will choose a word with that amount of letters, otherwise it will choose any random word.
+        </li>
+        <li>Textboxes equal to the amount of letters in the word are outlined.</li>
+        <li>
+            Then the user can start choosing letters. If the letter appears in the word, it will be placed
+            in the correct textbox. If the letter does not appear in the word, a body part will be added
+            to the gallows, starting with the head and so on. Every time the user chooses a letter, the
+            message with the amount of turns left will go down.
+        </li>
+        <li>
+            If the user guesses the word before all the bodyparts are added, a message box will pop
+            up that they won. If they do not, and all the bodyparts were added on, then a message
+            box will pop up that the person lost.
+        </li>
+    </ul>
+    <h5 class="text-body-secondary">
+        Wireframe
+    </h5>
+    <img src="~/images/wirefram.png" class="img-fluid" />
+</div>
