@@ -7,26 +7,27 @@
     <div class="col">
         <div class="row justify-content-start">
             <div class="col-1">
-                <button type="button" class="btn btn-primary">Start</button>
+                <button type="button" class="btn btn-primary m-1" id="start">Start</button>
             </div>
             <div class="col-3 text-end fw-semibold">How Many Letters:</div>
             <div class="col-2">
                 <input type="text" class="form-control" id="anmtletters" />
             </div>
 
-            <div class="col-3 fw-semibold" id="triesleft">-- tries left</div>
+            <div class="col-3 fw-semibold" id="triesleft"></div>
         </div>
+       
         <div class="col">
             <div class="row mt-5">
-                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g1"/>
-                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g2"/>
-                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g3"/>
-                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g4"/>
-                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g5"/>
-                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g6"/>
-                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g7"/>
-                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g8"/>
-                <input type="text" readonly class="col form-control m-1 border-primary fs-5 g" style="min-height:70px" id="g9"/>
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g0" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g1" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g2" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g3" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g4" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g5" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g6" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g7" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g8" />
             </div>
         </div>
         <div class="col mt-5">
@@ -43,7 +44,7 @@
                 <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="j">J</button>
                 <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="k">K</button>
                 <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="l">L</button>
-                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="m">M</button>                                           
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="m">M</button>
                 <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="n">N</button>
                 <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="o">O</button>
                 <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="p">P</button>
@@ -61,10 +62,60 @@
         </div>
     </div>
     <div class="col-5">
-        <img src="/images/p13p.png" class="img-fluid" style="max-height:600px" />
+        <img src="/images/p13p.png" class="img-fluid" id ="hangmanImg" style="max-height:600px" />
     </div>
 </div>
 
 <script>
+        const words = ["AN", "TO", "UP", "CAT", "SUN", "PEN", "TREE", "BOOK", "FISH", "APPLE", "CHAIR", "WATER",
+    "PLANET", "ORANGE", "SILVER", "TEACHER", "AIRPORT", "PICTURE", "COMPUTER", "ELEPHANT", "BUILDING", "DICTIONARY", "CHOCOLATE", "BACKPACK"];
 
+    let amntofletters; 
+    console.log(amntofletters);
+    const letters = [...document.querySelectorAll(".l")];
+    const allboxes = [...document.querySelectorAll(".b")];
+    const txttriesleft = document.querySelector("#triesleft");
+    let chosenword; 
+    let gameboxes = [];
+    let triesleft = 13;
+    const img = document.querySelector("#hangmanImg");
+
+    letters.forEach(l => l.addEventListener("click", guessLetter));
+    document.querySelector("#start").addEventListener("click", startGame);
+
+    function startGame(){
+        amntofletters = Number(document.querySelector("#anmtletters").value);    
+        console.log(amntofletters);
+        if(amntofletters){
+        allboxes.forEach(b => b.classList.add("border-white"));        gameboxes = allboxes.slice(0, amntofletters);
+        gameboxes.forEach(b => b.classList.remove("border-white"));
+        gameboxes.forEach(b => b.classList.add("border-primary"));
+
+        chosenword = getRandomWordByLength(amntofletters);
+        console.log(chosenword);
+        txttriesleft.textContent = "12 tries left";
+        }
+        else{
+
+        }
+    }
+
+    function guessLetter(event){
+        let letter = event.target.textContent;
+        console.log(letter);
+        if(chosenword.includes(letter)){
+            const positions = [...chosenword].map((c, i) => c === letter ? i : -1).filter(i => i !== -1);
+            positions.forEach(i => gameboxes[i].value = letter);
+        }
+        else{
+            triesleft = triesleft -1;
+            img.src = `/images/p${triesleft}p.png`;
+            txttriesleft.textContent = triesleft - 1 + " tries left";
+        }
+    }
+
+    function getRandomWordByLength(length) {
+        const filtered = words.filter(w => w.length === length);
+        return filtered[Math.floor(Math.random() * filtered.length)];
+    }
 </script>
