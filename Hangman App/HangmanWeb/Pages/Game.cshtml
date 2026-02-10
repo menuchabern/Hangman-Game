@@ -1,19 +1,20 @@
 ﻿@page
 @model HangmanWeb.Pages.GameModel
 @{
+    ViewData["Title"] = "Hangman";
 }
 
 <div class="row">
     <div class="col">
-        <div class="row justify-content-start mb-5">
+        <div class="row justify-content-start mb-md-5">
             <div class="col-1">
-                <button type="button" class="btn btn-primary m-1" id="start">Start</button>
+                <button type="button" class="btn btn-primary" id="start">Start</button>
             </div>
-            <div class="col-3 text-end fw-semibold">How Many Letters:</div>
+            <div class="col text-end fw-semibold p-1">How Many Letters:</div>
             <div class="col-2">
                 <input type="text" class="form-control" id="anmtletters" />
             </div>
-            <div class="col-3 fw-semibold mb-5" id="triesleft"></div>
+            <div class="col-3 fw-semibold mb-md-5" id="triesleft"></div>
         </div>
 
         <div class="col">
@@ -21,7 +22,7 @@
         </div>
         
         <div class="col">
-            <div class="row mt-5">
+            <div class="row mt-md-5">
                 <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g0" />
                 <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g1" />
                 <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g2" />
