@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col">
-        <div class="row justify-content-start">
+        <div class="row justify-content-start mb-5">
             <div class="col-1">
                 <button type="button" class="btn btn-primary m-1" id="start">Start</button>
             </div>
@@ -13,10 +13,13 @@
             <div class="col-2">
                 <input type="text" class="form-control" id="anmtletters" />
             </div>
-
-            <div class="col-3 fw-semibold" id="triesleft"></div>
+            <div class="col-3 fw-semibold mb-5" id="triesleft"></div>
         </div>
-       
+
+        <div class="col">
+            <h2 class="text-center" style="min-height:35px" id="msg"></h2>
+        </div>
+        
         <div class="col">
             <div class="row mt-5">
                 <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g0" />
@@ -72,36 +75,48 @@
 
     let amntofletters; 
     console.log(amntofletters);
-    const letters = [...document.querySelectorAll(".l")];
-    const allboxes = [...document.querySelectorAll(".b")];
-    const txttriesleft = document.querySelector("#triesleft");
     let chosenword; 
     let gameboxes = [];
     let triesleft = 13;
+    
+    const letters = [...document.querySelectorAll(".l")];
+    const allboxes = [...document.querySelectorAll(".b")];
+    const txttriesleft = document.querySelector("#triesleft");
+    const msg = document.querySelector("#msg");
     const img = document.querySelector("#hangmanImg");
-
     letters.forEach(l => l.addEventListener("click", guessLetter));
     document.querySelector("#start").addEventListener("click", startGame);
 
+
     function startGame(){
+        msg.textContent = "";
+        msg.classList.remove("text-success");
+        msg.classList.remove("text-danger");
+        allboxes.forEach(b => b.value = "");
+        letters.forEach(l => l.disabled = false);
+        triesleft = 13;
+        img.src = `/images/p13p.png`;
         amntofletters = Number(document.querySelector("#anmtletters").value);    
         console.log(amntofletters);
-        if(amntofletters){
-        allboxes.forEach(b => b.classList.add("border-white"));        gameboxes = allboxes.slice(0, amntofletters);
-        gameboxes.forEach(b => b.classList.remove("border-white"));
-        gameboxes.forEach(b => b.classList.add("border-primary"));
-
-        chosenword = getRandomWordByLength(amntofletters);
-        console.log(chosenword);
-        txttriesleft.textContent = "12 tries left";
+        
+        if(amntofletters && amntofletters < 10 && amntofletters > 1){
+            gameboxes = allboxes.slice(0, amntofletters);
+            allboxes.forEach(b => b.classList.add("border-white"));        
+            gameboxes.forEach(b => b.classList.remove("border-white"));
+            gameboxes.forEach(b => b.classList.add("border-primary"));
+            chosenword = getRandomWordByLength(amntofletters);
+            console.log(chosenword);
+            txttriesleft.textContent = "12 tries left";
         }
         else{
-
+            msg.classList.add("text-black");
+            msg.textContent = "Please choose a valid number from 2 - 9."
         }
-    }
+    } 
 
     function guessLetter(event){
         let letter = event.target.textContent;
+        event.target.disabled = true;
         console.log(letter);
         if(chosenword.includes(letter)){
             const positions = [...chosenword].map((c, i) => c === letter ? i : -1).filter(i => i !== -1);
@@ -111,6 +126,27 @@
             triesleft = triesleft -1;
             img.src = `/images/p${triesleft}p.png`;
             txttriesleft.textContent = triesleft - 1 + " tries left";
+        }
+
+        checkForWin();
+        checkForLose();
+    }
+    
+    function checkForWin(){
+        if(gameboxes.every(b => b.value)){
+            msg.textContent = "You Won!!";
+            letters.forEach(b => b.disabled = true);
+            msg.classList.remove("text-black");
+            msg.classList.add("text-success");
+        }
+    }
+
+    function checkForLose(){
+        if(triesleft <2){
+            msg.textContent = "You Lost! The word was " + chosenword;
+            letters.forEach(b => b.disabled = true);
+            msg.classList.remove("text-black");
+            msg.classList.add("text-danger");
         }
     }
 
