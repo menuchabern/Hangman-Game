@@ -1,0 +1,163 @@
+﻿@page
+@model HangmanWeb.Pages.gameJqueryModel
+@{
+        ViewData["Title"] = "Hangman jQuery";
+}
+
+<div class="row">
+    <div class="col">
+        <div class="row justify-content-start mb-md-5">
+            <div class="col-1">
+                <button type="button" class="btn btn-primary" id="start">Start</button>
+            </div>
+            <div class="col text-end fw-semibold p-1">How Many Letters:</div>
+            <div class="col-2">
+                <input type="text" class="form-control" id="anmtletters" />
+            </div>
+            <div class="col-3 fw-semibold mb-md-5" id="triesleft"></div>
+        </div>
+
+        <div class="col">
+            <h2 class="text-center" style="min-height:35px" id="msg"></h2>
+        </div>
+
+        <div class="col">
+            <div class="row mt-md-5">
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g0" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g1" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g2" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g3" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g4" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g5" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g6" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g7" />
+                <input type="text" readonly class="col form-control m-1 border-white fs-4 text-center p-0 b" style="min-height:70px" id="g8" />
+            </div>
+        </div>
+        <div class="col mt-5">
+            <div class="row">
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="a">A</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="b">B</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="c">C</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="d">D</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="e">E</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="f">F</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="g">G</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="h">H</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="i">I</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="j">J</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="k">K</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="l">L</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="m">M</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="n">N</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="o">O</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="p">P</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="q">Q</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="r">R</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="s">S</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="t">T</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="u">U</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="v">V</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="w">W</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="x">X</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="y">Y</button>
+                <button type="button" class="col-1 btn btn-light m-1 l" style="min-width:50px" id="z">Z</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-5">
+        <img src="/images/p13p.png" class="img-fluid" id="hangmanImg" style="max-height:600px" />
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const words = ["AN", "TO", "UP", "CAT", "SUN", "PEN", "TREE", "BOOK", "FISH", "APPLE", "CHAIR", "WATER",
+        "PLANET", "ORANGE", "SILVER", "TEACHER", "AIRPORT", "PICTURE", "COMPUTER", "ELEPHANT", "BUILDING", "DICTIONARY", "CHOCOLATE", "BACKPACK"];
+
+        let amntofletters;
+        console.log(amntofletters);
+        let chosenword;
+        let triesleft = 13;
+
+        let letters;
+        let allboxes;
+        let txttriesleft;
+        let msg;
+        let img;
+        let gameboxes = [];
+
+        $(document).ready(function(){
+            letters = [...document.querySelectorAll(".l")];
+            allboxes = [...document.querySelectorAll(".b")];
+            txttriesleft = document.querySelector("#triesleft");
+            msg = document.querySelector("#msg");
+            img = document.querySelector("#hangmanImg");
+            $(letters).click(guessLetter);
+            $("#start").click(startGame);
+        });
+
+        function startGame(){
+            msg.textContent = "";
+            msg.classList.remove("text-success");
+            msg.classList.remove("text-danger");
+            $(allboxes).value = "";
+            $(letters).disabled = false;
+            triesleft = 13;
+            img.src = `/images/p13p.png`;
+            amntofletters = Number(document.querySelector("#anmtletters").value);
+            console.log(amntofletters);
+
+            if(amntofletters && amntofletters < 10 && amntofletters > 1){
+                gameboxes = allboxes.slice(0, amntofletters);
+                $(allboxes).addClass("border-white");
+                $(gameboxes).removeClass("border-white").addClass("border-primary");
+                chosenword = getRandomWordByLength(amntofletters);
+                console.log(chosenword);
+                txttriesleft.textContent = "12 tries left";
+            }
+            else{
+                $(msg).addClass("text-black").text("Please choose a valid number from 2 - 9.");
+            }
+        }
+
+        function guessLetter(event){
+            let letter = event.target.textContent;
+            event.target.disabled = true;
+            console.log(letter);
+            if(chosenword.includes(letter)){
+                const positions = [...chosenword].map((c, i) => c === letter ? i : -1).filter(i => i !== -1);
+                positions.forEach(i => gameboxes[i].value = letter);
+            }
+            else{
+                triesleft = triesleft -1;
+                img.src = `/images/p${triesleft}p.png`;
+                txttriesleft.textContent = triesleft - 1 + " tries left";
+            }
+
+            checkForWin();
+            checkForLose();
+        }
+
+        function checkForWin(){
+            if(gameboxes.every(b => b.value)){
+                msg.textContent = "You Won!!";
+                letters.forEach(b => b.disabled = true);
+                $(msg).removeClass("text-black").addClass("text-success");
+            }
+        }
+
+        function checkForLose(){
+            if(triesleft <2){
+                msg.textContent = "You Lost! The word was " + chosenword;
+                letters.forEach(b => b.disabled = true);
+                $(msg).removeClass("text-black").addClass("text-danger");
+            }
+        }
+
+        function getRandomWordByLength(length) {
+            const filtered = words.filter(w => w.length === length);
+            return filtered[Math.floor(Math.random() * filtered.length)];
+        }
+    </script>
+}
