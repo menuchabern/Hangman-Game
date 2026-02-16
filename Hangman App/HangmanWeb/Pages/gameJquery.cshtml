@@ -93,7 +93,7 @@
             txttriesleft = document.querySelector("#triesleft");
             msg = document.querySelector("#msg");
             img = document.querySelector("#hangmanImg");
-            $(letters).click(guessLetter);
+            $(letters).click(guessLetter).prop("disabled", true);
             $("#start").click(startGame);
         });
 
@@ -101,8 +101,8 @@
             msg.textContent = "";
             msg.classList.remove("text-success");
             msg.classList.remove("text-danger");
-            $(allboxes).value = "";
-            $(letters).disabled = false;
+            $(allboxes).prop("value", "");
+            $(letters).prop("disabled", false);
             triesleft = 13;
             img.src = `/images/p13p.png`;
             amntofletters = Number(document.querySelector("#anmtletters").value);
@@ -142,7 +142,7 @@
         function checkForWin(){
             if(gameboxes.every(b => b.value)){
                 msg.textContent = "You Won!!";
-                letters.forEach(b => b.disabled = true);
+                $(letters).prop("disabled", true);
                 $(msg).removeClass("text-black").addClass("text-success");
             }
         }

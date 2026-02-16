@@ -71,7 +71,7 @@
 </div>
 
 <script>
-        const words = ["AN", "TO", "UP", "CAT", "SUN", "PEN", "TREE", "BOOK", "FISH", "APPLE", "CHAIR", "WATER",
+    const words = ["AN", "TO", "UP", "CAT", "SUN", "PEN", "TREE", "BOOK", "FISH", "APPLE", "CHAIR", "WATER",
     "PLANET", "ORANGE", "SILVER", "TEACHER", "AIRPORT", "PICTURE", "COMPUTER", "ELEPHANT", "BUILDING", "DICTIONARY", "CHOCOLATE", "BACKPACK"];
 
     let amntofletters; 
@@ -81,6 +81,7 @@
     let triesleft = 13;
     
     const letters = [...document.querySelectorAll(".l")];
+    letters.forEach(l => l.disabled = true);
     const allboxes = [...document.querySelectorAll(".b")];
     const txttriesleft = document.querySelector("#triesleft");
     const msg = document.querySelector("#msg");
