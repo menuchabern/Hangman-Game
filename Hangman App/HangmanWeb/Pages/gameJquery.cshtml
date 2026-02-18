@@ -102,11 +102,12 @@
             msg.classList.remove("text-success");
             msg.classList.remove("text-danger");
             $(allboxes).prop("value", "");
-            $(letters).prop("disabled", false);
-            triesleft = 13;
             img.src = `/images/p13p.png`;
             amntofletters = Number(document.querySelector("#anmtletters").value);
             console.log(amntofletters);
+            txttriesleft.textContent = "12 tries left";
+            triesleft = 13;
+            $(letters).prop("disabled", true);
 
             if(amntofletters && amntofletters < 10 && amntofletters > 1){
                 gameboxes = allboxes.slice(0, amntofletters);
@@ -114,7 +115,7 @@
                 $(gameboxes).removeClass("border-white").addClass("border-primary");
                 chosenword = getRandomWordByLength(amntofletters);
                 console.log(chosenword);
-                txttriesleft.textContent = "12 tries left";
+                $(letters).prop("disabled", false);
             }
             else{
                 $(msg).addClass("text-black").text("Please choose a valid number from 2 - 9.");
